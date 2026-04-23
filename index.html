@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>永恒世界 · 角色羁绊测试</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    :root {
+      --black: #111111;
+      --gray-1: #f5f5f5;
+      --gray-2: #e8e8e8;
+      --gray-3: #aaaaaa;
+      --white: #ffffff;
+      --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+    }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--font);
+      min-height: 100vh;
+      max-width: 390px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+
+    /* ═══ 封面页 ═══ */
+    #page-cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 28px;
+      text-align: center;
+      gap: 28px;
+    }
+
+    .cover-title-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+    .cover-logo {
+      width: 72px; height: 72px;
+      background: var(--gray-1); border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; margin-bottom: 4px;
+    }
+
+    .cover-title { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.3; }
+    .cover-subtitle { font-size: 14px; color: var(--gray-3); font-weight: 400; }
+
+    .cover-desc { font-size: 14px; color: #555; line-height: 1.7; max-width: 280px; }
+
+    .cover-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+    .tag { padding: 4px 10px; background: var(--gray-1); border-radius: 20px; font-size: 11px; color: var(--gray-3); }
+
+    .btn-start {
+      width: 100%; max-width: 280px; height: 52px;
+      background: var(--black); color: var(--white); border: none;
+      border-radius: 14px; font-size: 15px; font-weight: 700;
+      font-family: var(--font); cursor: pointer; transition: opacity 0.15s;
+      letter-spacing: 0.3px;
+    }
+    .btn-start:active { opacity: 0.7; }
+
+    /* ═══ 题目页 ═══ */
+    #page-quiz { min-height: 100vh; padding-bottom: 40px; }
+
+    .quiz-header {
+      padding: 14px 20px 0;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .btn-back {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--gray-1); border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 15px;
+    }
+
+    .quiz-counter { font-size: 13px; color: var(--gray-3); font-weight: 500; }
+
+    .progress-wrap { padding: 16px 20px 0; }
+    .progress-track { height: 3px; background: var(--gray-2); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--black); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+
+    .quiz-body { padding: 28px 24px 0; }
+
+    .quiz-char-wrap { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 22px; }
+    .quiz-char-icon {
+      width: 48px; height: 48px; background: var(--gray-1); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; flex-shrink: 0;
+    }
+    .quiz-char-bubble {
+      background: var(--gray-1); border-radius: 12px 12px 12px 4px;
+      padding: 9px 13px; font-size: 12px; color: var(--gray-3);
+      line-height: 1.6; flex: 1; margin-top: 4px;
+    }
+
+    .question-text { font-size: 18px; font-weight: 700; line-height: 1.5; letter-spacing: -0.3px; margin-bottom: 24px; }
+
+    .options { display: flex; flex-direction: column; gap: 10px; }
+
+    .opt {
+      padding: 15px 16px; border: 1.5px solid var(--gray-2);
+      border-radius: 12px; font-size: 14px; line-height: 1.55;
+      color: var(--black); background: var(--white); cursor: pointer;
+      text-align: left; font-family: var(--font);
+      display: flex; align-items: flex-start; gap: 12px;
+      transition: all 0.15s;
+    }
+
+    .opt-key { font-size: 11px; color: var(--gray-3); font-weight: 700; min-width: 14px; margin-top: 1px; letter-spacing: 0.5px; }
+
+    .opt:active, .opt.selected { background: var(--black); border-color: var(--black); color: var(--white); }
+    .opt.selected .opt-key { color: rgba(255,255,255,0.45); }
+
+    .btn-next {
+      margin: 24px 24px 0; width: calc(100% - 48px); height: 52px;
+      background: var(--black); color: var(--white); border: none;
+      border-radius: 14px; font-size: 15px; font-weight: 700;
+      font-family: var(--font); cursor: pointer;
+      transition: opacity 0.15s; opacity: 0.2; pointer-events: none;
+    }
+    .btn-next.enabled { opacity: 1; pointer-events: all; }
+    .btn-next.enabled:active { opacity: 0.7; }
+
+    /* ═══ 结果页 ═══ */
+    #page-result { min-height: 100vh; padding-bottom: 60px; }
+
+    .result-header {
+      padding: 14px 20px 0;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 13px; color: var(--gray-3);
+    }
+
+    .result-hero { padding: 40px 28px 28px; display: flex; flex-direction: column; align-items: center; }
+
+    .result-char-frame {
+      width: 120px; height: 120px; background: var(--gray-1);
+      border-radius: 28px; display: flex; align-items: center; justify-content: center;
+      font-size: 60px; margin-bottom: 20px;
+    }
+
+    .result-label { font-size: 12px; color: var(--gray-3); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
+    .result-type { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; }
+    .result-subname { font-size: 15px; color: var(--gray-3); margin-bottom: 20px; }
+
+    .result-match-bar {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--gray-1); border-radius: 12px; padding: 12px 16px;
+      margin-bottom: 24px; width: 100%; max-width: 320px;
+    }
+    .match-icon { font-size: 22px; flex-shrink: 0; }
+    .match-info { flex: 1; text-align: left; }
+    .match-label { font-size: 12px; color: var(--gray-3); margin-bottom: 2px; }
+    .match-name { font-size: 15px; font-weight: 700; }
+    .match-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 10px; flex-shrink: 0; }
+    .badge-green { background: #d4edda; color: #2e7d32; }
+    .badge-blue { background: #dbeafe; color: #1d4ed8; }
+    .badge-orange { background: #fff3cd; color: #b45309; }
+
+    .result-quote { background: var(--gray-1); border-radius: 12px; padding: 14px 18px; margin: 0 24px 24px; font-size: 13px; line-height: 1.7; color: #555; text-align: left; }
+
+    .traits { padding: 0 24px; margin-bottom: 24px; }
+    .traits-title { font-size: 11px; color: var(--gray-3); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+    .trait-list { display: flex; gap: 8px; flex-wrap: wrap; }
+    .trait-tag { padding: 5px 12px; background: var(--gray-1); border-radius: 20px; font-size: 12px; color: #555; }
+
+    .divider { height: 1px; background: var(--gray-2); margin: 0 24px 24px; }
+
+    .result-desc-wrap { padding: 0 24px; margin-bottom: 32px; }
+    .result-desc-title { font-size: 12px; color: var(--gray-3); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+    .result-desc-text { font-size: 14px; line-height: 1.8; color: #444; }
+
+    .result-actions { padding: 0 24px; display: flex; flex-direction: column; gap: 10px; }
+    .btn-share { width: 100%; height: 48px; background: var(--black); color: var(--white); border: none; border-radius: 12px; font-size: 14px; font-weight: 700; font-family: var(--font); cursor: pointer; }
+    .btn-share:active { opacity: 0.7; }
+    .btn-retry { width: 100%; height: 48px; background: var(--white); color: var(--black); border: 1.5px solid var(--gray-2); border-radius: 12px; font-size: 14px; font-weight: 600; font-family: var(--font); cursor: pointer; }
+    .btn-retry:active { background: var(--gray-1); }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ 封面页 ═══ -->
+  <div id="page-cover">
+    <div class="cover-title-wrap">
+      <div class="cover-logo">⚔️</div>
+      <div class="cover-title">永恒世界</div>
+      <div class="cover-subtitle">角色羁绊测试</div>
+    </div>
+    <p class="cover-desc">在黑脊镇的冒险中，你与谁最投缘？<br>12道题，测出你在永恒世界中的灵魂羁绊。</p>
+    <div class="cover-tags">
+      <span class="tag">南希</span><span class="tag">亚历克斯</span>
+      <span class="tag">安妮</span><span class="tag">露娜</span>
+      <span class="tag">达莉亚</span><span class="tag">诺娃</span>
+      <span class="tag">佩妮洛普</span>
+    </div>
+    <button class="btn-start" onclick="startQuiz()">开始测试</button>
+  </div>
+
+  <!-- ═══ 题目页 ═══ -->
+  <div id="page-quiz" class="hidden">
+    <div class="quiz-header">
+      <button class="btn-back" onclick="goBack()">←</button>
+      <span class="quiz-counter" id="quiz-counter">1 / 12</span>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+    <div class="quiz-body">
+      <div class="quiz-char-wrap">
+        <div class="quiz-char-icon" id="quiz-char-icon">🌿</div>
+        <div class="quiz-char-bubble" id="quiz-char-bubble">认真想哦～</div>
+      </div>
+      <div class="question-text" id="question-text"></div>
+      <div class="options" id="options-container"></div>
+    </div>
+    <button class="btn-next" id="btn-next" onclick="nextQuestion()">继续 →</button>
+  </div>
+
+  <!-- ═══ 结果页 ═══ -->
+  <div id="page-result" class="hidden">
+    <div class="result-header">
+      <span>永恒世界 · 羁绊测试</span>
+      <span id="result-date"></span>
+    </div>
+    <div class="result-hero">
+      <div class="result-char-frame" id="result-char-frame">🌿</div>
+      <div class="result-label">你的羁绊角色</div>
+      <div class="result-type" id="result-type">—</div>
+      <div class="result-subname" id="result-subname">—</div>
+      <div class="result-match-bar" id="result-match-bar"></div>
+    </div>
+    <div class="result-quote" id="result-quote"></div>
+    <div class="traits">
+      <div class="traits-title">性格标签</div>
+      <div class="trait-list" id="trait-list"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="result-desc-wrap">
+      <div class="result-desc-title">关系解读</div>
+      <div class="result-desc-text" id="result-desc-text"></div>
+    </div>
+    <div class="result-actions">
+      <button class="btn-share" onclick="shareResult()">分享结果</button>
+      <button class="btn-retry" onclick="retryQuiz()">重新测试</button>
+    </div>
+  </div>
+
+  <script>
+    // ═══════════════════════════════════════════════════════════════════
+    // 12道题目（来自试题.md，适配MBTI维度AB二选一）
+    // E/I×3  N/S×3  F/T×4  J/P×2
+    // ═══════════════════════════════════════════════════════════════════
+    const questions = [
+      {
+        char: '🔥', bubble: '极限挑战～',
+        text: '达莉亚约你去新开的极限运动馆，面对高空项目，你的想法是？',
+        options: [
+          { key: 'A', text: '有点担心安全，会详细询问设施和教练资质，再做决定。', dim: 'J' },
+          { key: 'B', text: '太棒了！立刻答应，享受挑战极限和肾上腺素飙升的快感。', dim: 'E' },
+          { key: 'C', text: '委婉拒绝，提议去海边散步或爬山，觉得那样更惬意。', dim: 'I' },
+          { key: 'D', text: '虽然不太感兴趣，但为了陪她，愿意尝试一下。', dim: 'F' }
+        ]
+      },
+      {
+        char: '👑', bubble: '解读一下她的意图～',
+        text: '公主卡吕普索在一个普通的清晨，单独邀请你共进早餐。这略显突兀的邀请，让你首先倾向于认为她的主要意图是：',
+        options: [
+          { key: 'A', text: '这可能是皇室某种惯例性社交，或她今日恰好需要个早餐伙伴。', dim: 'T' },
+          { key: 'B', text: '她遇到了某些私人困扰，需要找一个绝对信任的人倾诉。', dim: 'F' },
+          { key: 'C', text: '她对你有好感，想借这个私密机会多了解你。', dim: 'F' },
+          { key: 'D', text: '永恒世界中重要人物的变动可能对王国造成威胁，她在评估或拉拢你这股重要力量。', dim: 'N' }
+        ]
+      },
+      {
+        char: '🎋', bubble: '你的第一反应？',
+        text: '无意中发现安妮写满你心事的日记本，你会？',
+        options: [
+          { key: 'A', text: '放回原处，但心里感到很温暖，对她的感情更确定。', dim: 'F' },
+          { key: 'B', text: '立刻合上放回，当作没看见，尊重隐私。', dim: 'T' },
+          { key: 'C', text: '非常纠结，最终可能看一点，但之后会找机会坦白。', dim: 'P' },
+          { key: 'D', text: '心跳加速，忍不住小心翻阅，想了解更多。', dim: 'P' }
+        ]
+      },
+      {
+        char: '🌙', bubble: '哪个场景真的吓到你了？',
+        text: '在弗林克那栋诡异的房子里，哪个场景最让你后背发凉？',
+        options: [
+          { key: 'A', text: '路灯下，那个哭泣的小女孩，毫无征兆地猛然回头看你。', dim: 'N' },
+          { key: 'B', text: '墙上的老挂钟，指针滴答作响，钟摆的节奏越来越诡异。', dim: 'N' },
+          { key: 'C', text: '眼前那条黝黑、深邃、仿佛没有尽头的走廊。', dim: 'S' },
+          { key: 'D', text: '昏暗客厅里，突然响起的刺耳电话铃声。', dim: 'S' }
+        ]
+      },
+      {
+        char: '💎', bubble: '面对突发状况……',
+        text: '诺娃的电脑在破解关键密码时突然蓝屏，数据可能丢失，她急哭了，你会？',
+        options: [
+          { key: 'A', text: '保持冷静，尝试各种重启和恢复方法，告诉她"一定有办法"。', dim: 'T' },
+          { key: 'B', text: '一边轻拍她的背安抚，一边大脑飞速思考可能的解决方案。', dim: 'T/F' },
+          { key: 'C', text: '开个玩笑缓解气氛："看来你的电脑也觉得这密码太难为人了。"', dim: 'P' },
+          { key: 'D', text: '先抱住她安慰："别急，数据没了我们可以一起重新找。"', dim: 'F' }
+        ]
+      },
+      {
+        char: '🔥', bubble: '最后一搏！',
+        text: '格斗训练中被达莉亚击倒，她得意地笑，你会？',
+        options: [
+          { key: 'A', text: '迅速起身，眼神锐利，准备再战。', dim: 'T' },
+          { key: 'B', text: '笑着认输，夸她进步真大。', dim: 'F' },
+          { key: 'C', text: '假装受伤不起，逗她过来查看。', dim: 'P' },
+          { key: 'D', text: '躺地上耍赖："刚才地滑，不算！"', dim: 'P' }
+        ]
+      },
+      {
+        char: '🌙', bubble: '认真思考一下哦～',
+        text: '露娜突然一脸认真地问你"人类存在的意义是什么"，你正在擦武器，会怎么回答？',
+        options: [
+          { key: 'A', text: '停下动作，认真思考后给出一个自己认为合理的答案。', dim: 'T' },
+          { key: 'B', text: '坦白自己不知道，并反问她："你觉得呢？我想听听你的。"', dim: 'N/P' },
+          { key: 'C', text: '看着她，觉得她思考的样子很美，说："你的存在就是意义。"', dim: 'F' },
+          { key: 'D', text: '觉得这问题太大，笑着拉她去吃好吃的："为了这个！"', dim: 'S/P' }
+        ]
+      },
+      {
+        char: '💎', bubble: '仔细感受一下……',
+        text: '诺娃邀请你进入她构建的虚拟现实空间。当你戴上设备，眼前景象稳定后，你首先注意到并最感兴趣的是：',
+        options: [
+          { key: 'A', text: '空间中流动的、构成一切基础的复杂数据代码和几何框架。', dim: 'N' },
+          { key: 'B', text: '由光线与色彩构成的、令人屏息的绝美景观，仿佛置身童话。', dim: 'S' },
+          { key: 'C', text: '一个漂浮在眼前的、需要解开的初始谜题，它似乎是探索的关键。', dim: 'N' },
+          { key: 'D', text: '立刻开始尝试与各种物体互动，寻找隐藏的小游戏或趣味彩蛋。', dim: 'P' }
+        ]
+      },
+      {
+        char: '🌿', bubble: '跟随直觉～',
+        text: '和南希一起上瑜伽课，她向其他学员夸赞你的身材，并自然地抚摸你的肩膀，你会？',
+        options: [
+          { key: 'A', text: '很享受这一刻，觉得这是你们默契的表现，并希望可以多停留一会。', dim: 'I/F' },
+          { key: 'B', text: '顺着她的话展示了一个标准的平板支撑，并且笑着看向大家。', dim: 'E/F' },
+          { key: 'C', text: '脑中突然闪过，她今天好像格外开心，是因为看到我的进步了吗？', dim: 'I/T' },
+          { key: 'D', text: '感到一丝尴尬，但是听到南希的夸奖还是心中暗喜。', dim: 'I/F' }
+        ]
+      },
+      {
+        char: '🎋', bubble: '你会怎么处理？',
+        text: '和露娜参加完亡灵节聚会后，你收到了她发来的合影，照片里你们笑得很开心。这时安妮路过看到了，你会？',
+        options: [
+          { key: 'A', text: '只是简单给她看一眼，然后继续低头看着照片，回味当时的瞬间。', dim: 'I/P' },
+          { key: 'B', text: '把手机稍微移开一点，对安妮笑笑："要看看吗？不过还是和你去那个餐厅拍得最好。"', dim: 'F/J' },
+          { key: 'C', text: '自然地收起手机，转而问她："安妮，你上次说的那家新甜品店，我们周末去试试？"', dim: 'J' },
+          { key: 'D', text: '兴奋地招呼她："安妮快看！我们今天的装扮怎么样？"', dim: 'E/P' }
+        ]
+      },
+      {
+        char: '💎', bubble: '你最需要哪种伙伴？',
+        text: '进入了一个危险未知的隐藏关卡，你更希望身边是哪种类型的伙伴？',
+        options: [
+          { key: 'A', text: '亚历克斯那样的探索家，随性洒脱，总能发现意想不到的路径或彩蛋。', dim: 'N/P' },
+          { key: 'B', text: '诺娃那样的技术专家，能破解机关，提供最安全的行动路线。', dim: 'I' },
+          { key: 'C', text: '达莉亚那样的行动派，身手敏捷，遇到战斗能第一时间并肩作战。', dim: 'E' },
+          { key: 'D', text: '佩妮洛普那样的气氛担当，即使面对危险也能用吐槽化解紧张。', dim: 'E' }
+        ]
+      },
+      {
+        char: '🌿', bubble: '最后一步～',
+        text: '结束了一天的冒险，你回到黑脊镇，这时你的手机同时亮起，你会优先处理哪条信息？',
+        options: [
+          { key: 'A', text: '把游戏音乐开大，专心整理和清点一下今天的物资掉落。', dim: 'I' },
+          { key: 'B', text: '无人打扰，独自回公寓打理鱼缸，顺便上线钓会儿鱼。', dim: 'I' },
+          { key: 'C', text: '南希发来的"楼下新开了家不错的咖啡馆，要不要一起去坐坐？"', dim: 'E' },
+          { key: 'D', text: '公会伙伴的"全服BOSS战缺人，速来！"', dim: 'E' }
+        ]
+      }
+    ];
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 角色数据
+    // ═══════════════════════════════════════════════════════════════════
+    const characters = {
+      南希:    { emoji: '🌿', subname: 'INFJ · 引路人型', traits: ['温柔坚定', '理想主义', '知性成熟'] },
+      亚历克斯: { emoji: '🌪️', subname: 'ISFP · 探险家型', traits: ['忠于自我', '追求自由', '艺术气质'] },
+      安妮:    { emoji: '🎋', subname: 'ISFJ · 守护者型', traits: ['亲和忠诚', '默默照顾', '温暖细腻'] },
+      露娜:    { emoji: '🌙', subname: 'INFP · 调停者型', traits: ['文艺治愈', '敏感理想', '向往纯粹'] },
+      达莉亚:  { emoji: '🔥', subname: 'ESTP · 挑战者型', traits: ['直率好胜', '行动至上', '活在当下'] },
+      诺娃:    { emoji: '💎', subname: 'INTP · 逻辑学家型', traits: ['冷静理性', '独立思考', '逻辑清晰'] },
+      佩妮洛普: { emoji: '🎭', subname: 'ESFP · 表演者型', traits: ['自信外放', '幽默戏剧', '热爱生活'] },
+      '塞-泰':  { emoji: '👑', subname: 'INTJ · 战略家', traits: ['高贵掌控', '战略眼光', '深远规划'] }
+    };
+
+    // ═══════════════════════════════════════════════════════════════════
+    // MBTI 匹配表（16种 → 角色 + 羁绊指数 + 解读）
+    // ═══════════════════════════════════════════════════════════════════
+    const matchTable = {
+      'ISTJ': { char: '安妮',    icon: '🟢', badge: '好的机会',   badgeClass: 'badge-green',  quote: '你们在责任感和务实生活上高度共鸣，是细水长流的陪伴。' },
+      'ISFJ': { char: '安妮',    icon: '🟢', badge: '好的机会',   badgeClass: 'badge-green',  quote: '完美的镜像伴侣。你们拥有完全相同的核心特质，能给予彼此最安心的归属感。' },
+      'ESTP': { char: '达莉亚',  icon: '🔵', badge: '理想绝配',   badgeClass: 'badge-blue',   quote: '棋逢对手的同类。你们能一起享受极限运动，也能在危机中并肩作战。' },
+      'ISTP': { char: '达莉亚',  icon: '🟡', badge: '单方面合适', badgeClass: 'badge-orange', quote: '最佳冒险拍档。你欣赏她的活力，她喜欢你的冷静利落，配合得天衣无缝。' },
+      'INFP': { char: '露娜',    icon: '🟢', badge: '好的机会',   badgeClass: 'badge-green',  quote: '灵魂共振的知己。你们能深刻理解对方的理想主义，在一起时无需多言就能互相治愈。' },
+      'ENFP': { char: '露娜',    icon: '🔵', badge: '理想绝配',   badgeClass: 'badge-blue',   quote: '你的热情开朗能照亮她的内敛，而她的温柔与理想主义能深深吸引你。' },
+      'INTJ': { char: '塞-泰',  icon: '🟢', badge: '好的机会',   badgeClass: 'badge-green',  quote: '强强联合的战略家。你们目标导向且理智冷静，是并肩俯瞰全局的伙伴。' },
+      'ENTJ': { char: '塞-泰',  icon: '🔵', badge: '理想绝配',   badgeClass: 'badge-blue',   quote: '女王与战神的组合。你们互相尊重彼此的能力，是典型的强强联合。' },
+      'INFJ': { char: '南希',    icon: '🟢', badge: '好的机会',   badgeClass: 'badge-green',  quote: '温柔的引路人。你们能敏锐捕捉到对方的情绪变化，建立起深刻且互相滋养的精神连接。' },
+      'ENFJ': { char: '南希',    icon: '🔵', badge: '理想绝配',   badgeClass: 'badge-blue',   quote: '你的外向关怀能融化她偶尔的疏离感，而她的深度与洞察力能给你带来安全感。' },
+      'INTP': { char: '诺娃',    icon: '🟢', badge: '好的机会',   badgeClass: 'badge-green',  quote: '智性恋的归宿。你们可以在自己的世界里自得其乐，又能在专业领域产生强烈的共鸣与欣赏。' },
+      'ENTP': { char: '诺娃',    icon: '🔵', badge: '理想绝配',   badgeClass: 'badge-blue',   quote: '你天马行空的脑洞能打破她的沉闷，她严密的逻辑能接住你的奇思妙想。' },
+      'ESFP': { char: '佩妮洛普',icon: '🟢', badge: '好的机会',  badgeClass: 'badge-green',  quote: '欢乐的舞台搭档。你们充满即兴的乐趣和热烈的氛围，是人群中最耀眼、最快乐的组合。' },
+      'ESFJ': { char: '佩妮洛普',icon: '🔵', badge: '理想绝配',  badgeClass: 'badge-blue',   quote: '你天生的亲和力与她的外放活力完美契合，是让人羡慕的活力CP。' },
+      'ISFP': { char: '亚历克斯',icon: '🟢', badge: '好的机会',  badgeClass: 'badge-green',  quote: '安静的艺术共鸣。你们不需要太多言语，一个眼神就能明白对方对美的追求和内心的坚持。' },
+      'ESTJ': { char: '亚历克斯',icon: '🟡', badge: '可能合适',  badgeClass: 'badge-orange', quote: '互补的成长型关系。虽然处事风格不同，但你欣赏她的艺术天赋，她也能在你的带领下获得成长。' }
+    };
+
+    // ═══════════════════════════════════════════════════════════════════
+    // 状态
+    // ═══════════════════════════════════════════════════════════════════
+    let currentQ = 0;
+    let selectedDim = null;
+    let mbti = { E: 0, I: 0, N: 0, S: 0, F: 0, T: 0, J: 0, P: 0 };
+
+    function startQuiz() {
+      currentQ = 0; selectedDim = null;
+      mbti = { E: 0, I: 0, N: 0, S: 0, F: 0, T: 0, J: 0, P: 0 };
+      document.getElementById('page-cover').classList.add('hidden');
+      document.getElementById('page-quiz').classList.remove('hidden');
+      document.getElementById('page-result').classList.add('hidden');
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = questions[currentQ];
+      const total = questions.length;
+      document.getElementById('quiz-counter').textContent = `${currentQ + 1} / ${total}`;
+      document.getElementById('progress-fill').style.width = `${(currentQ / total) * 100}%`;
+      document.getElementById('quiz-char-icon').textContent = q.char;
+      document.getElementById('quiz-char-bubble').textContent = q.bubble;
+      document.getElementById('question-text').textContent = q.text;
+
+      const container = document.getElementById('options-container');
+      container.innerHTML = q.options.map(opt => `
+        <button class="opt" data-dim="${opt.dim}" onclick="selectOpt(this, '${opt.dim}')">
+          <span class="opt-key">${opt.key}</span>
+          <span>${opt.text}</span>
+        </button>
+      `).join('');
+
+      selectedDim = null;
+      document.getElementById('btn-next').classList.remove('enabled');
+      document.getElementById('btn-next').textContent = currentQ === total - 1 ? '查看结果 →' : '继续 →';
+    }
+
+    function selectOpt(el, dim) {
+      document.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedDim = dim;
+      document.getElementById('btn-next').classList.add('enabled');
+    }
+
+    function nextQuestion() {
+      if (!selectedDim) return;
+      // 支持多维度计分，如 "NP" → N+=0.5, P+=0.5；"TF" → T+=0.5, F+=0.5
+      if (selectedDim.includes('/')) {
+        const parts = selectedDim.split('/');
+        parts.forEach(d => { if (mbti[d] !== undefined) mbti[d] += 0.5; });
+      } else {
+        mbti[selectedDim]++;
+      }
+      currentQ++;
+      if (currentQ < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function calcMBTI() {
+      const e = mbti.E >= mbti.I ? 'E' : 'I';
+      const n = mbti.N >= mbti.S ? 'N' : 'S';
+      const f = mbti.F >= mbti.T ? 'F' : 'T';
+      const j = mbti.J >= mbti.P ? 'J' : 'P';
+      return e + n + f + j;
+    }
+
+    function showResult() {
+      document.getElementById('page-quiz').classList.add('hidden');
+      document.getElementById('page-result').classList.remove('hidden');
+
+      const type = calcMBTI();
+      const match = matchTable[type] || matchTable['ISFJ'];
+      const char = characters[match.char];
+
+      document.getElementById('result-date').textContent = new Date().toLocaleDateString('zh-CN');
+      document.getElementById('result-char-frame').textContent = char.emoji;
+      document.getElementById('result-type').textContent = match.char;
+      document.getElementById('result-subname').textContent = `${type} · 你的MBTI`;
+
+      document.getElementById('result-match-bar').innerHTML = `
+        <span class="match-icon">${match.icon}</span>
+        <div class="match-info">
+          <div class="match-label">适配角色</div>
+          <div class="match-name">${match.char}</div>
+        </div>
+        <span class="match-badge ${match.badgeClass}">${match.badge}</span>
+      `;
+
+      document.getElementById('result-quote').textContent = `"${match.quote}"`;
+      document.getElementById('trait-list').innerHTML = char.traits.map(t => `<span class="trait-tag">${t}</span>`).join('');
+      document.getElementById('result-desc-text').textContent = match.quote;
+    }
+
+    function retryQuiz() {
+      document.getElementById('page-result').classList.add('hidden');
+      document.getElementById('page-cover').classList.remove('hidden');
+    }
+
+    function goBack() {
+      if (currentQ > 0) { currentQ--; showQuestion(); }
+      else {
+        document.getElementById('page-quiz').classList.add('hidden');
+        document.getElementById('page-cover').classList.remove('hidden');
+      }
+    }
+
+    function shareResult() {
+      const type = calcMBTI();
+      const match = matchTable[type] || matchTable['ISFJ'];
+      const text = `我在永恒世界里测出了 ${type}，和 ${match.char} 最配！羁绊指数：${match.badge} ⚔️`;
+      if (navigator.share) navigator.share({ title: '永恒世界角色羁绊测试', text });
+      else navigator.clipboard.writeText(text).then(() => alert('已复制到剪贴板！'));
+    }
+  </script>
+</body>
+</html>
