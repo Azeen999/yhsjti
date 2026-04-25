@@ -85,6 +85,10 @@
 
     .quiz-running-gif {
       width: 28px; height: 28px; object-fit: contain;
+      position: absolute; top: 50%; transform: translateY(-50%);
+      transition: left 0.4s ease; z-index: 2;
+      /* start off-screen left */
+      left: -14px;
     }
 
     .quiz-bubble {
@@ -93,9 +97,18 @@
 
     .quiz-counter { font-size: 13px; color: var(--gray-3); font-weight: 500; flex-shrink: 0; }
 
-    .progress-wrap { padding: 16px 20px 0; }
-    .progress-track { height: 3px; background: var(--gray-2); border-radius: 2px; overflow: hidden; }
-    .progress-fill { height: 100%; background: var(--black); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+    .progress-wrap {
+      padding: 16px 20px 0;
+      position: relative; height: 28px; display: flex; align-items: center;
+    }
+    .progress-track {
+      height: 3px; background: var(--gray-2); border-radius: 2px;
+      overflow: visible; width: 100%; position: relative;
+    }
+    .progress-fill {
+      height: 100%; background: var(--black); border-radius: 2px;
+      transition: width 0.4s ease; width: 0%;
+    }
 
     .quiz-body { padding: 28px 24px 0; }
 
@@ -209,13 +222,13 @@
     <div class="quiz-header">
       <button class="btn-back" onclick="goBack()">←</button>
       <div class="quiz-header-center">
-        <img class="quiz-running-gif" id="quiz-running-gif" src="img/跑动.gif" alt="">
         <span class="quiz-bubble" id="quiz-bubble">认真想哦～</span>
       </div>
       <span class="quiz-counter" id="quiz-counter">1 / 12</span>
     </div>
-    <div class="progress-wrap">
+    <div class="progress-wrap" id="progress-wrap">
       <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <img class="quiz-running-gif" id="quiz-running-gif" src="img/跑动.gif" alt="">
     </div>
     <div class="quiz-body">
       <div class="question-text" id="question-text"></div>
@@ -439,8 +452,14 @@
       const total = questions.length;
       document.getElementById('quiz-counter').textContent = `${currentQ + 1} / ${total}`;
       document.getElementById('progress-fill').style.width = `${(currentQ / total) * 100}%`;
-      document.getElementById('quiz-running-gif').src = `img/跑动.gif?t=${Date.now()}`;
       document.getElementById('quiz-bubble').textContent = q.bubble;
+      // 定位跑动GIF到进度条前端（进度条有左右各20px padding）
+      const wrap = document.getElementById('progress-wrap');
+      const gif = document.getElementById('quiz-running-gif');
+      const pct = currentQ / total;
+      const wrapW = wrap.clientWidth;
+      // 进度条有效宽度 = wrapWidth - 40px（左右各20px padding）
+      gif.style.left = `${pct * (wrapW - 40) - 14}px`;
       document.getElementById('question-text').textContent = q.text;
 
       const container = document.getElementById('options-container');
