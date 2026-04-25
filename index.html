@@ -76,28 +76,28 @@
       width: 36px; height: 36px; border-radius: 50%;
       background: var(--gray-1); border: none;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: 15px;
+      cursor: pointer; font-size: 15px; flex-shrink: 0;
     }
 
-    .quiz-counter { font-size: 13px; color: var(--gray-3); font-weight: 500; }
+    .quiz-header-center {
+      display: flex; align-items: center; gap: 8px; flex: 1; justify-content: center;
+    }
+
+    .quiz-running-gif {
+      width: 28px; height: 28px; object-fit: contain;
+    }
+
+    .quiz-bubble {
+      font-size: 12px; color: var(--gray-3); white-space: nowrap;
+    }
+
+    .quiz-counter { font-size: 13px; color: var(--gray-3); font-weight: 500; flex-shrink: 0; }
 
     .progress-wrap { padding: 16px 20px 0; }
     .progress-track { height: 3px; background: var(--gray-2); border-radius: 2px; overflow: hidden; }
     .progress-fill { height: 100%; background: var(--black); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
 
     .quiz-body { padding: 28px 24px 0; }
-
-    .quiz-char-wrap { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 22px; }
-    .quiz-char-icon {
-      width: 48px; height: 48px; background: var(--gray-1); border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 26px; flex-shrink: 0;
-    }
-    .quiz-char-bubble {
-      background: var(--gray-1); border-radius: 12px 12px 12px 4px;
-      padding: 9px 13px; font-size: 12px; color: var(--gray-3);
-      line-height: 1.6; flex: 1; margin-top: 4px;
-    }
 
     .question-text { font-size: 18px; font-weight: 700; line-height: 1.5; letter-spacing: -0.3px; margin-bottom: 24px; }
 
@@ -208,16 +208,16 @@
   <div id="page-quiz" class="hidden">
     <div class="quiz-header">
       <button class="btn-back" onclick="goBack()">←</button>
+      <div class="quiz-header-center">
+        <img class="quiz-running-gif" id="quiz-running-gif" src="img/跑动.gif" alt="">
+        <span class="quiz-bubble" id="quiz-bubble">认真想哦～</span>
+      </div>
       <span class="quiz-counter" id="quiz-counter">1 / 12</span>
     </div>
     <div class="progress-wrap">
       <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
     </div>
     <div class="quiz-body">
-      <div class="quiz-char-wrap">
-        <div class="quiz-char-icon" id="quiz-char-icon">🌿</div>
-        <div class="quiz-char-bubble" id="quiz-char-bubble">认真想哦～</div>
-      </div>
       <div class="question-text" id="question-text"></div>
       <div class="options" id="options-container"></div>
     </div>
@@ -439,8 +439,8 @@
       const total = questions.length;
       document.getElementById('quiz-counter').textContent = `${currentQ + 1} / ${total}`;
       document.getElementById('progress-fill').style.width = `${(currentQ / total) * 100}%`;
-      document.getElementById('quiz-char-icon').textContent = q.char;
-      document.getElementById('quiz-char-bubble').textContent = q.bubble;
+      document.getElementById('quiz-running-gif').src = `img/跑动.gif?t=${Date.now()}`;
+      document.getElementById('quiz-bubble').textContent = q.bubble;
       document.getElementById('question-text').textContent = q.text;
 
       const container = document.getElementById('options-container');
