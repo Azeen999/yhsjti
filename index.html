@@ -198,7 +198,8 @@
       <span class="tag">南希</span><span class="tag">亚历克斯</span>
       <span class="tag">安妮</span><span class="tag">露娜</span>
       <span class="tag">达莉亚</span><span class="tag">诺娃</span>
-      <span class="tag">佩妮洛普</span>
+      <span class="tag">佩妮洛普</span><span class="tag">卡吕普索</span>
+      <span class="tag">常</span>
     </div>
     <button class="btn-start" onclick="startQuiz()">开始测试</button>
   </div>
@@ -262,10 +263,10 @@
         char: '🔥', bubble: '极限挑战～',
         text: '达莉亚约你去新开的极限运动馆，面对高空项目，你的想法是？',
         options: [
-          { key: 'A', text: '有点担心安全，会详细询问设施和教练资质，再做决定。', dim: 'J' },
-          { key: 'B', text: '太棒了！立刻答应，享受挑战极限和肾上腺素飙升的快感。', dim: 'E' },
-          { key: 'C', text: '委婉拒绝，提议去海边散步或爬山，觉得那样更惬意。', dim: 'I' },
-          { key: 'D', text: '虽然不太感兴趣，但为了陪她，愿意尝试一下。', dim: 'F' }
+          { key: 'A', text: '有点担心安全，会详细询问设施和教练资质，再做决定。', dim: 'S-J' },
+          { key: 'B', text: '太棒了！立刻答应，享受挑战极限和肾上腺素飙升的快感。', dim: 'Se-P' },
+          { key: 'C', text: '委婉拒绝，提议去海边散步或爬山，觉得那样更惬意。', dim: 'Si-J' },
+          { key: 'D', text: '虽然不太感兴趣，但为了陪她，愿意尝试一下。', dim: 'Fe-J' }
         ]
       },
       {
@@ -282,9 +283,9 @@
         char: '🎋', bubble: '你的第一反应？',
         text: '无意中发现安妮写满你心事的日记本，你会？',
         options: [
-          { key: 'A', text: '放回原处，但心里感到很温暖，对她的感情更确定。', dim: 'F' },
-          { key: 'B', text: '立刻合上放回，当作没看见，尊重隐私。', dim: 'T' },
-          { key: 'C', text: '非常纠结，最终可能看一点，但之后会找机会坦白。', dim: 'P' },
+          { key: 'A', text: '放回原处，但心里感到很温暖，对她的感情更确定。', dim: 'F-J' },
+          { key: 'B', text: '立刻合上放回，当作没看见，尊重隐私。', dim: 'T-J' },
+          { key: 'C', text: '非常纠结，最终可能看一点，但之后会找机会坦白。', dim: 'F-P' },
           { key: 'D', text: '心跳加速，忍不住小心翻阅，想了解更多。', dim: 'P' }
         ]
       },
@@ -304,7 +305,7 @@
         options: [
           { key: 'A', text: '保持冷静，尝试各种重启和恢复方法，告诉她"一定有办法"。', dim: 'T' },
           { key: 'B', text: '一边轻拍她的背安抚，一边大脑飞速思考可能的解决方案。', dim: 'T/F' },
-          { key: 'C', text: '开个玩笑缓解气氛："看来你的电脑也觉得这密码太难为人了。"', dim: 'P' },
+          { key: 'C', text: '开个玩笑缓解气氛："看来你的电脑也觉得这密码太难为人了。"', dim: 'T' },
           { key: 'D', text: '先抱住她安慰："别急，数据没了我们可以一起重新找。"', dim: 'F' }
         ]
       },
@@ -312,10 +313,10 @@
         char: '🔥', bubble: '最后一搏！',
         text: '格斗训练中被达莉亚击倒，她得意地笑，你会？',
         options: [
-          { key: 'A', text: '迅速起身，眼神锐利，准备再战。', dim: 'T' },
+          { key: 'A', text: '迅速起身，眼神锐利，准备再战。', dim: 'E' },
           { key: 'B', text: '笑着认输，夸她进步真大。', dim: 'F' },
-          { key: 'C', text: '假装受伤不起，逗她过来查看。', dim: 'P' },
-          { key: 'D', text: '躺地上耍赖："刚才地滑，不算！"', dim: 'P' }
+          { key: 'C', text: '假装受伤不起，逗她过来查看。', dim: 'I' },
+          { key: 'D', text: '躺地上耍赖："刚才地滑，不算！"', dim: 'E' }
         ]
       },
       {
@@ -323,9 +324,9 @@
         text: '露娜突然一脸认真地问你"人类存在的意义是什么"，你正在擦武器，会怎么回答？',
         options: [
           { key: 'A', text: '停下动作，认真思考后给出一个自己认为合理的答案。', dim: 'T' },
-          { key: 'B', text: '坦白自己不知道，并反问她："你觉得呢？我想听听你的。"', dim: 'N/P' },
+          { key: 'B', text: '坦白自己不知道，并反问她："你觉得呢？我想听听你的。"', dim: 'N-P' },
           { key: 'C', text: '看着她，觉得她思考的样子很美，说："你的存在就是意义。"', dim: 'F' },
-          { key: 'D', text: '觉得这问题太大，笑着拉她去吃好吃的："为了这个！"', dim: 'S/P' }
+          { key: 'D', text: '觉得这问题太大，笑着拉她去吃好吃的："为了这个！"', dim: 'S-P' }
         ]
       },
       {
@@ -335,34 +336,34 @@
           { key: 'A', text: '空间中流动的、构成一切基础的复杂数据代码和几何框架。', dim: 'N' },
           { key: 'B', text: '由光线与色彩构成的、令人屏息的绝美景观，仿佛置身童话。', dim: 'S' },
           { key: 'C', text: '一个漂浮在眼前的、需要解开的初始谜题，它似乎是探索的关键。', dim: 'N' },
-          { key: 'D', text: '立刻开始尝试与各种物体互动，寻找隐藏的小游戏或趣味彩蛋。', dim: 'P' }
+          { key: 'D', text: '立刻开始尝试与各种物体互动，寻找隐藏的小游戏或趣味彩蛋。', dim: 'S' }
         ]
       },
       {
         char: '🌿', bubble: '跟随直觉～',
         text: '和南希一起上瑜伽课，她向其他学员夸赞你的身材，并自然地抚摸你的肩膀，你会？',
         options: [
-          { key: 'A', text: '很享受这一刻，觉得这是你们默契的表现，并希望可以多停留一会。', dim: 'I/F' },
-          { key: 'B', text: '顺着她的话展示了一个标准的平板支撑，并且笑着看向大家。', dim: 'E/F' },
-          { key: 'C', text: '脑中突然闪过，她今天好像格外开心，是因为看到我的进步了吗？', dim: 'I/T' },
-          { key: 'D', text: '感到一丝尴尬，但是听到南希的夸奖还是心中暗喜。', dim: 'I/F' }
+          { key: 'A', text: '很享受这一刻，觉得这是你们默契的表现，并希望可以多停留一会。', dim: 'I-F' },
+          { key: 'B', text: '顺着她的话展示了一个标准的平板支撑，并且笑着看向大家。', dim: 'E-F' },
+          { key: 'C', text: '脑中突然闪过，她今天好像格外开心，是因为看到我的进步了吗？', dim: 'I-T' },
+          { key: 'D', text: '感到一丝尴尬，但是听到南希的夸奖还是心中暗喜。', dim: 'I-F' }
         ]
       },
       {
         char: '🎋', bubble: '你会怎么处理？',
         text: '和露娜参加完亡灵节聚会后，你收到了她发来的合影，照片里你们笑得很开心。这时安妮路过看到了，你会？',
         options: [
-          { key: 'A', text: '只是简单给她看一眼，然后继续低头看着照片，回味当时的瞬间。', dim: 'I/P' },
-          { key: 'B', text: '把手机稍微移开一点，对安妮笑笑："要看看吗？不过还是和你去那个餐厅拍得最好。"', dim: 'F/J' },
+          { key: 'A', text: '只是简单给她看一眼，然后继续低头看着照片，回味当时的瞬间。', dim: 'I-P' },
+          { key: 'B', text: '把手机稍微移开一点，对安妮笑笑："要看看吗？不过还是和你去那个餐厅拍得最好。"', dim: 'F-J' },
           { key: 'C', text: '自然地收起手机，转而问她："安妮，你上次说的那家新甜品店，我们周末去试试？"', dim: 'J' },
-          { key: 'D', text: '兴奋地招呼她："安妮快看！我们今天的装扮怎么样？"', dim: 'E/P' }
+          { key: 'D', text: '兴奋地招呼她："安妮快看！我们今天的装扮怎么样？"', dim: 'E-P' }
         ]
       },
       {
         char: '💎', bubble: '你最需要哪种伙伴？',
         text: '进入了一个危险未知的隐藏关卡，你更希望身边是哪种类型的伙伴？',
         options: [
-          { key: 'A', text: '亚历克斯那样的探索家，随性洒脱，总能发现意想不到的路径或彩蛋。', dim: 'N/P' },
+          { key: 'A', text: '亚历克斯那样的探索家，随性洒脱，总能发现意想不到的路径或彩蛋。', dim: 'N-P' },
           { key: 'B', text: '诺娃那样的技术专家，能破解机关，提供最安全的行动路线。', dim: 'I' },
           { key: 'C', text: '达莉亚那样的行动派，身手敏捷，遇到战斗能第一时间并肩作战。', dim: 'E' },
           { key: 'D', text: '佩妮洛普那样的气氛担当，即使面对危险也能用吐槽化解紧张。', dim: 'E' }
@@ -384,36 +385,37 @@
     // 角色数据
     // ═══════════════════════════════════════════════════════════════════
     const characters = {
-      南希:    { emoji: '🌿', subname: 'INFJ · 引路人型', traits: ['温柔坚定', '理想主义', '知性成熟'] },
-      亚历克斯: { emoji: '🌪️', subname: 'ISFP · 探险家型', traits: ['忠于自我', '追求自由', '艺术气质'] },
-      安妮:    { emoji: '🎋', subname: 'ISFJ · 守护者型', traits: ['亲和忠诚', '默默照顾', '温暖细腻'] },
-      露娜:    { emoji: '🌙', subname: 'INFP · 调停者型', traits: ['文艺治愈', '敏感理想', '向往纯粹'] },
-      达莉亚:  { emoji: '🔥', subname: 'ESTP · 挑战者型', traits: ['直率好胜', '行动至上', '活在当下'] },
-      诺娃:    { emoji: '💎', subname: 'INTP · 逻辑学家型', traits: ['冷静理性', '独立思考', '逻辑清晰'] },
-      佩妮洛普: { emoji: '🎭', subname: 'ESFP · 表演者型', traits: ['自信外放', '幽默戏剧', '热爱生活'] },
-      '塞-泰':  { emoji: '👑', subname: 'INTJ · 战略家', traits: ['高贵掌控', '战略眼光', '深远规划'] }
+      南希:    { img: '南希.png', subname: 'INFJ · 引路人型', traits: ['温柔坚定', '理想主义', '知性成熟'] },
+      亚历克斯: { img: '亚历克斯.png', subname: 'ISFP · 探险家型', traits: ['忠于自我', '追求自由', '艺术气质'] },
+      安妮:    { img: '安妮.png', subname: 'ISFJ · 守护者型', traits: ['亲和忠诚', '默默照顾', '温暖细腻'] },
+      露娜:    { img: '露娜.png', subname: 'INFP · 调停者型', traits: ['文艺治愈', '敏感理想', '向往纯粹'] },
+      达莉亚:  { img: '达莉亚.png', subname: 'ESTP · 挑战者型', traits: ['直率好胜', '行动至上', '活在当下'] },
+      诺娃:    { img: '诺娃.png', subname: 'INTP · 逻辑学家型', traits: ['冷静理性', '独立思考', '逻辑清晰'] },
+      佩妮洛普: { img: '佩妮洛普.png', subname: 'ESFP · 表演者型', traits: ['自信外放', '幽默戏剧', '热爱生活'] },
+      卡吕普索: { img: '卡吕普索.png', subname: 'INTJ · 战略家', traits: ['高贵掌控', '战略眼光', '深远规划'] },
+      常:      { img: '常.png', subname: 'ISTP · 鉴赏家型', traits: ['沉默默契', '铁杆兄弟', '无需多言'] }
     };
 
     // ═══════════════════════════════════════════════════════════════════
     // MBTI 匹配表（16种 → 角色 + 羁绊指数 + 解读）
     // ═══════════════════════════════════════════════════════════════════
     const matchTable = {
-      'ISTJ': { char: '安妮',    icon: '🟢', badge: '好的机会',   badgeClass: 'badge-green',  quote: '你们在责任感和务实生活上高度共鸣，是细水长流的陪伴。' },
-      'ISFJ': { char: '安妮',    icon: '🟢', badge: '好的机会',   badgeClass: 'badge-green',  quote: '完美的镜像伴侣。你们拥有完全相同的核心特质，能给予彼此最安心的归属感。' },
-      'ESTP': { char: '达莉亚',  icon: '🔵', badge: '理想绝配',   badgeClass: 'badge-blue',   quote: '棋逢对手的同类。你们能一起享受极限运动，也能在危机中并肩作战。' },
-      'ISTP': { char: '达莉亚',  icon: '🟡', badge: '单方面合适', badgeClass: 'badge-orange', quote: '最佳冒险拍档。你欣赏她的活力，她喜欢你的冷静利落，配合得天衣无缝。' },
-      'INFP': { char: '露娜',    icon: '🟢', badge: '好的机会',   badgeClass: 'badge-green',  quote: '灵魂共振的知己。你们能深刻理解对方的理想主义，在一起时无需多言就能互相治愈。' },
-      'ENFP': { char: '露娜',    icon: '🔵', badge: '理想绝配',   badgeClass: 'badge-blue',   quote: '你的热情开朗能照亮她的内敛，而她的温柔与理想主义能深深吸引你。' },
-      'INTJ': { char: '塞-泰',  icon: '🟢', badge: '好的机会',   badgeClass: 'badge-green',  quote: '强强联合的战略家。你们目标导向且理智冷静，是并肩俯瞰全局的伙伴。' },
-      'ENTJ': { char: '塞-泰',  icon: '🔵', badge: '理想绝配',   badgeClass: 'badge-blue',   quote: '女王与战神的组合。你们互相尊重彼此的能力，是典型的强强联合。' },
-      'INFJ': { char: '南希',    icon: '🟢', badge: '好的机会',   badgeClass: 'badge-green',  quote: '温柔的引路人。你们能敏锐捕捉到对方的情绪变化，建立起深刻且互相滋养的精神连接。' },
-      'ENFJ': { char: '南希',    icon: '🔵', badge: '理想绝配',   badgeClass: 'badge-blue',   quote: '你的外向关怀能融化她偶尔的疏离感，而她的深度与洞察力能给你带来安全感。' },
-      'INTP': { char: '诺娃',    icon: '🟢', badge: '好的机会',   badgeClass: 'badge-green',  quote: '智性恋的归宿。你们可以在自己的世界里自得其乐，又能在专业领域产生强烈的共鸣与欣赏。' },
-      'ENTP': { char: '诺娃',    icon: '🔵', badge: '理想绝配',   badgeClass: 'badge-blue',   quote: '你天马行空的脑洞能打破她的沉闷，她严密的逻辑能接住你的奇思妙想。' },
-      'ESFP': { char: '佩妮洛普',icon: '🟢', badge: '好的机会',  badgeClass: 'badge-green',  quote: '欢乐的舞台搭档。你们充满即兴的乐趣和热烈的氛围，是人群中最耀眼、最快乐的组合。' },
-      'ESFJ': { char: '佩妮洛普',icon: '🔵', badge: '理想绝配',  badgeClass: 'badge-blue',   quote: '你天生的亲和力与她的外放活力完美契合，是让人羡慕的活力CP。' },
-      'ISFP': { char: '亚历克斯',icon: '🟢', badge: '好的机会',  badgeClass: 'badge-green',  quote: '安静的艺术共鸣。你们不需要太多言语，一个眼神就能明白对方对美的追求和内心的坚持。' },
-      'ESTJ': { char: '亚历克斯',icon: '🟡', badge: '可能合适',  badgeClass: 'badge-orange', quote: '互补的成长型关系。虽然处事风格不同，但你欣赏她的艺术天赋，她也能在你的带领下获得成长。' }
+      'ISTJ':  { char: '达莉亚',   img: '达莉亚.png', slogan: '你是我的静默堡垒，我是你的狂野风暴，我们的爱如肋排般炙热且真实。', desc: '你像一本严谨的行动指南，沉默寡言却总能精准接住她的疲惫；她则是燃烧的火焰，带着烧烤肋排的烟火气和苏门答腊虎般的野性闯入你的生活。看似冰与火的碰撞，实则是你坚实的后背托举起她的肆意张扬。当你在健身房角落默默注视她挥汗如雨，她反手将毛巾甩在他脸上说"别看了，来打一场"，这种无需言语的默契，是理性与激情的完美共舞。' },
+      'ISFJ':  { char: '佩妮洛普', img: '佩妮洛普.png', slogan: '你是我喧嚣世界里的静谧港湾，我是你卸下防备后的璀璨星光。', desc: '你像一张柔软的毛毯，总是细致地记住佩妮对烤三文鱼的全熟要求；她则是聚光灯下的焦点，带着火烈鸟般的明艳与美貌之外的荒诞幽默，让她在任何场合都闪闪发光。你用温柔的目光追随她的光芒，而她享受着他独一无二的注视。当喧嚣散去，她卸下精致的妆容，窝在你怀里吐槽晚宴的无聊，这是最深沉的守护与最真挚的陪伴。' },
+      'ESTP':  { char: '安妮',     img: '安妮.png', slogan: '你是我的宇宙级冒险，我是你的专属避风港，我们一起穿越虫洞。', desc: '你是冲锋陷阵的探险家，而她是永远的后勤部长。你带着芝士蛋糕的甜味闯入她的生活，打破了她对世界的懵懂认知；她则用柔软与必要的刚强包容你的鲁莽。在太空站的生死危机中，是你拉着她狂奔，而她颤抖着递上的氧气瓶，比任何誓言都动人。这种关系充满了直球式的浪漫与过命的交情，是肾上腺素与安全感的交织。' },
+      'ISTP':  { char: '常',      img: '常.png', slogan: '无需多言的兄弟情，你懂我的沉默，我挺你的每一次疯狂。', desc: '他们像两把锋利的刀，不需要过多的言语就能切开生活的迷雾。作为兄弟，常从不抢戏，却在你需要时默默递上一瓶酒；而你懂他的沉默，更懂他藏在风趣随和下的孤独。他是你最铁的哥们，陪你打游戏、看比赛，在你失恋时二话不说把你从酒吧扛回家。这种关系没有矫情，只有"我懂你"的硬核浪漫。' },
+      'INFP':  { char: '露娜',    img: '露娜.png', slogan: '我们是彼此深渊里的微光，懂你的暗黑，也爱你隐藏的温柔。', desc: '你们像两面镜子，映照出彼此内心深处最幽微的角落。你读懂了她偏爱《七宗罪》背后的那份暗黑浪漫，也理解软萌无害的外表下会向往那种既危险又迷人的动物。在别人眼中，你们都是难以捉摸的谜，但在彼此面前，你们可以卸下所有伪装。当她穿着白毛衣，轻轻触碰你的手背，无需言语，那种灵魂共振的默契，足以抵御世间所有的喧嚣。' },
+      'ENFP':  { char: '南希',    img: '南希.png', slogan: '你是我平淡岁月里的最盛大的烟火，映出最美好的我们，偷走我的心。', desc: '你是她平静生活里突然闯入的一阵旋风，融化了她岁月之下的稳重。她看着你像看着一场盛大的烟火，既欣赏你的活力，又默默为你收拾残局。当她在深夜为你整理衣领，你突然凑上去亲吻她的额头，那一刻，她压抑已久的情感彻底沦陷在你直截了当的攻势下，原来成熟女性的温柔，也可以被你轻易点燃。' },
+      'INTJ':  { char: '卡吕普索', img: '卡吕普索.png', slogan: '傲娇公主遇上腹黑骑士，强强联手，才是这世上最配的棋局。', desc: '你们是棋逢对手的对手，也是志同道合的知己。她是离家出走的精灵公主，傲娇和高冷曾让你吃尽苦头，但你用如《指环王》的史诗感和威严，一步步撬开了她的心房。当她终于放下身段，笨拙地为你包扎伤口，你轻抚她的脸颊说"我等你很久了"，那一刻，两个高傲的灵魂终于找到了可以并肩作战的支点。' },
+      'ENTJ':  { char: '诺娃',    img: '诺娃.png', slogan: '铁血指挥官与天才黑客，你负责征服世界，我负责守护你的疯狂。', desc: '你是天生的指挥家，而她是游离于规则之外的天才。你欣赏她戴着眼罩的特工气质，也纵容她对《黑客帝国》的痴迷。在别人眼里，你强势到不留余地，但在她面前，你愿意为她放慢脚步，听她讲解那些天马行空的对世界的理解。当她在危机时刻冷静地破解密码，你看着她，眼神里满是骄傲——原来，你的软肋，早已成了她。' },
+      'INFJ':  { char: '南希',    img: '南希.png', slogan: '我们是彼此的镜像与归处，无需言语的懂得，是最顶级的浪漫。', desc: '你们是灵魂的双生子，是彼此不言而喻的港湾。你总能提前感受到她未曾说出口的疲惫，而她会在你为未来迷茫时，恰到好处地点一盏茶，用那份沉静的温柔为你托底。深夜的客厅里，你们或许只是安静地各自看书，但一个眼神的交汇，就胜过千言万语。她不会问你为何深夜不归，只会等你回来，用一句"辛苦了"卸下你所有的防备。' },
+      'ENFJ':  { char: '露娜',    img: '露娜.png', slogan: '你是我的光，让我敢于在阳光下，展现我灵魂深处所有的褶皱与斑斓。', desc: '你是将她从自我孤岛中引领出来的那束光。她习惯性地缩在角落里，用悬疑小说的复杂暗喻包裹自己，而你总能看到那层外壳下纯粹又易碎的内心。在亡灵派对上，鼓励她摘下手套，不是为了改变她，而是让她知道，她那些被视为怪异的敏感与深邃，在你眼中是世间最珍贵的宝藏。当她终于在谷仓的阴影里，用颤抖的声音对你诉说过往，你拥抱的，是整个世界的信任。' },
+      'INTP':  { char: '诺娃',    img: '诺娃.png', slogan: '我们是彼此的思维迷宫，在逻辑的宇宙里碰撞，是最高智商的浪漫。', desc: '你们的关系是一场永不厌倦的脑力追逐。别人觉得她戴着眼罩是扮酷，只有你理解那是她与外界信息保持距离、构建内在逻辑体系的方式。你们可以就一个战术方案或哲学悖论辩论到深夜，火花四溅，又乐在其中。在你眼中，她那些"不合时宜"的直率和抽离，恰恰是天才最迷人的棱角。当你疲惫于外界的琐碎，回到她身边，那无需社交的、各自沉浸思考的沉默，便是最自在的充电。' },
+      'ENTP':  { char: '卡吕普索', img: '卡吕普索.png', slogan: '我们的爱情是一场高智商博弈，是棋逢对手，更是灵魂的精准制导。', desc: '你和她是针锋相对又势均力敌的欢喜冤家。你热衷于用各种奇谈怪论和挑衅，去戳破她公主那层高贵又脆弱的"礼仪"外壳，看她气急败坏又无可奈何的样子。而她，则用她精准到冷酷的逻辑和长远布局，一次次将你天马行空的想法拉回现实，甚至为你补上致命的漏洞。你们的关系与其说是恋人，不如说是最了解对方弱点、也最信任对方能力的战略同盟。' },
+      'ESFP':  { char: '安妮',    img: '安妮.png', slogan: '我带你看遍世界繁华，你是我每次冒险归来，灯火通明的家。', desc: '你就是她的小太阳，用最热烈的行动点燃她的生活。她会在你每个心血来潮的冒险后，默默收拾"残局"，眼里却闪着为你骄傲的光。你的存在，让她的世界从安稳的小窝，变成了充满惊喜的游乐场。当你拉着她冲向太空舱，在失重中她紧紧攥着你的手尖叫又大笑，那一刻，你给她的不止是刺激，更是"有我在"的绝对安全感。她是你的定心丸，而你是她勇敢的理由。' },
+      'ESFJ':  { char: '亚历克斯', img: '亚历克斯.png', slogan: '我愿用全部的温暖，拥抱你身上每一根带刺的棱角，直至它们化为温柔。', desc: '你像一团温暖而不灼人的火，悄然融化着她用纹身和冷酷表情筑起的心墙。别人只看到她叛逆不羁的刺，而你总能第一个发现她生病时强撑的脆弱，并"蛮横"地带去毯子和药。你用无微不至的关怀，为她构建了一个无需戒备的港湾。当她终于卸下防备，在只属于你们的小天地里对你露出毫无保留的微笑，你知道，你赢得了这个世界上最珍贵的信任。' },
+      'ISFP':  { char: '佩妮洛普', img: '佩妮洛普.png', slogan: '在浮华世界的背面，我们共享一杯沉默，和一个真实的灵魂。', desc: '你们是彼此最懂"美"的鉴赏家。你能看穿她华服与光环下的疲惫，欣赏她不为人知的、静谧的孤独。而她，则迷恋于你眼中那个剥离了美丽外表标签后，真实的她。在炫目的派对角落，你们能共享一杯酒，无需言语，只用眼神交流对这场喧嚣的揶揄。你为她挡开不怀好意的目光，她则在只有你们二人时，对你展露最松弛、也最生动的笑容。' },
+      'ESTJ':  { char: '亚历克斯', img: '亚历克斯.png', slogan: '我是你混乱世界的秩序，而你，是我严谨人生中最绚烂的意外。', desc: '你像一位可靠的船长，为她这艘看似随性漂泊的孤舟，提供了坚定的航向与港湾。你欣赏她充满生命力的野性，并用你的果决与担当，为这份野性保驾护航。当她在冲突中本能地竖起尖刺，你并非压制，而是用更坚实的臂膀站在她身前，用行动告诉她"这事交给我"。你的可靠，让她可以安心地偶尔收起利爪，展现内里的柔软。你们是秩序与不羁的完美互补。' }
     };
 
     // ═══════════════════════════════════════════════════════════════════
@@ -463,18 +465,36 @@
 
     function nextQuestion() {
       if (!selectedDim) return;
-      // 支持多维度计分，如 "NP" → N+=0.5, P+=0.5；"TF" → T+=0.5, F+=0.5
-      if (selectedDim.includes('/')) {
-        const parts = selectedDim.split('/');
-        parts.forEach(d => { if (mbti[d] !== undefined) mbti[d] += 0.5; });
-      } else {
-        mbti[selectedDim]++;
-      }
+      scoreDim(selectedDim);
       currentQ++;
       if (currentQ < questions.length) {
         showQuestion();
       } else {
         showResult();
+      }
+    }
+
+    // 计分规则：
+    // 单独字母：I/T/N/S/F/J/P → 1票
+    // 斜杠分隔：I/F, N/P → 各1票
+    // 横杠分隔：S-J, F-J → 各1票
+    // 认知功能前缀(小写)：Se-P → S=1,P=1 + e(偏向)=0.5；Fe-J → F=1,J=1 + e=0.5；Si-J → S=1,J=1 + i=0.5
+    function scoreDim(dim) {
+      const TENDENCY = ['e','i','n','s','f','t'];
+      if (dim.includes('/')) {
+        dim.split('/').forEach(d => { if (mbti[d] !== undefined) mbti[d] += 1; });
+      } else if (dim.includes('-')) {
+        // e.g. Se-P, Si-J, Fe-J, S-J
+        const parts = dim.split('-');
+        const prefix = parts[0]; // e.g. "Se", "Si", "Fe"
+        const suffix = parts[1]; // e.g. "P", "J"
+        const main = prefix[0]; // S, S, F
+        const tend = prefix[1]; // e, i, e
+        mbti[main] += 1;
+        if (TENDENCY.includes(tend)) mbti[tend.toUpperCase()] += 0.5;
+        if (mbti[suffix] !== undefined) mbti[suffix] += 1;
+      } else {
+        if (mbti[dim] !== undefined) mbti[dim] += 1;
       }
     }
 
@@ -495,27 +515,28 @@
       const char = characters[match.char];
 
       document.getElementById('result-date').textContent = new Date().toLocaleDateString('zh-CN');
-      document.getElementById('result-char-frame').textContent = char.emoji;
+      document.getElementById('result-char-frame').innerHTML = `<img src="img/${match.img}" alt="${match.char}" style="width:100%;height:100%;object-fit:cover;border-radius:28px;">`;
       document.getElementById('result-type').textContent = match.char;
       document.getElementById('result-subname').textContent = `${type} · 你的MBTI`;
 
       document.getElementById('result-match-bar').innerHTML = `
-        <span class="match-icon">${match.icon}</span>
+        <img class="match-icon" src="img/${match.img}" alt="${match.char}" style="width:40px;height:40px;border-radius:10px;object-fit:cover;flex-shrink:0;">
         <div class="match-info">
           <div class="match-label">适配角色</div>
           <div class="match-name">${match.char}</div>
         </div>
-        <span class="match-badge ${match.badgeClass}">${match.badge}</span>
       `;
 
-      document.getElementById('result-quote').textContent = `"${match.quote}"`;
+      document.getElementById('result-quote').textContent = `「${match.slogan}」`;
       document.getElementById('trait-list').innerHTML = char.traits.map(t => `<span class="trait-tag">${t}</span>`).join('');
-      document.getElementById('result-desc-text').textContent = match.quote;
+      document.getElementById('result-desc-text').textContent = match.desc;
     }
 
     function retryQuiz() {
       document.getElementById('page-result').classList.add('hidden');
       document.getElementById('page-cover').classList.remove('hidden');
+      currentQ = 0; selectedDim = null;
+      mbti = { E: 0, I: 0, N: 0, S: 0, F: 0, T: 0, J: 0, P: 0 };
     }
 
     function goBack() {
@@ -529,7 +550,7 @@
     function shareResult() {
       const type = calcMBTI();
       const match = matchTable[type] || matchTable['ISFJ'];
-      const text = `我在永恒世界里测出了 ${type}，和 ${match.char} 最配！羁绊指数：${match.badge} ⚔️`;
+      const text = `我在永恒世界里测出了 ${type}，适配角色是 ${match.char}！⚔️ 「${match.slogan}」`;
       if (navigator.share) navigator.share({ title: '永恒世界角色羁绊测试', text });
       else navigator.clipboard.writeText(text).then(() => alert('已复制到剪贴板！'));
     }
