@@ -41,19 +41,43 @@
     .cover-title-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 
     .cover-logo {
-      width: 72px; height: 72px;
+      width: 200px; height: 100px;
       background: var(--gray-1); border-radius: 18px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 36px; margin-bottom: 4px;
+      font-size: 36px; margin-bottom: -8px;
     }
-
-    .cover-title { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.3; }
-    .cover-subtitle { font-size: 14px; color: var(--gray-3); font-weight: 400; }
+    .cover-logo img { width: 100%; height: 200%; object-fit: contain; border-radius: 18px; }
+S
+    .cover-title { font-size: 16px; font-weight: 300; letter-spacing: 0.5px; line-height: 0.5px; }
+    .cover-subtitle { font-size: 22px; color: var(--black); font-weight: 800; }
 
     .cover-desc { font-size: 14px; color: #555; line-height: 1.7; max-width: 280px; }
 
     .cover-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
     .tag { padding: 4px 10px; background: var(--gray-1); border-radius: 20px; font-size: 11px; color: var(--gray-3); }
+
+    .cover-scroll {
+      width: 100%; overflow: hidden; padding: 8px 0;
+    }
+    .cover-scroll .scroll-track {
+      display: flex; flex-direction: row; gap: 10px;
+      width: max-content; animation: scroll-left 20s linear infinite;
+    }
+    .cover-scroll .scroll-item {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      flex-shrink: 0;
+    }
+    .cover-scroll .scroll-item img {
+      width: 70px; height: 70px; object-fit: cover;
+      border-radius: 16px; border: 2px solid var(--gray-2);
+    }
+    .cover-scroll .scroll-item span {
+      font-size: 11px; color: var(--gray-3); font-weight: 500;
+    }
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
     .btn-start {
       width: 100%; max-width: 280px; height: 52px;
@@ -84,11 +108,10 @@
     }
 
     .quiz-running-gif {
-      width: 28px; height: 28px; object-fit: contain;
-      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 60px; height: 60px; object-fit: contain;
+      position: absolute; top: 75%; transform: translateY(-50%) translateX(-50%);
       transition: left 0.4s ease; z-index: 2;
-      /* start off-screen left */
-      left: -14px;
+      left: 0;
     }
 
     .quiz-bubble {
@@ -98,11 +121,11 @@
     .quiz-counter { font-size: 13px; color: var(--gray-3); font-weight: 500; flex-shrink: 0; }
 
     .progress-wrap {
-      padding: 16px 20px 0;
+      padding: 30px 10px 0;
       position: relative; height: 28px; display: flex; align-items: center;
     }
     .progress-track {
-      height: 3px; background: var(--gray-2); border-radius: 2px;
+      height: 6px; background: var(--gray-2); border-radius: 2px;
       overflow: visible; width: 100%; position: relative;
     }
     .progress-fill {
@@ -149,17 +172,30 @@
       font-size: 13px; color: var(--gray-3);
     }
 
-    .result-hero { padding: 40px 28px 28px; display: flex; flex-direction: column; align-items: center; }
-
-    .result-char-frame {
-      width: 120px; height: 120px; background: var(--gray-1);
-      border-radius: 28px; display: flex; align-items: center; justify-content: center;
-      font-size: 60px; margin-bottom: 20px;
+    .result-hero {
+      padding: 40px 28px 28px;
+      display: flex; gap: 24px; align-items: flex-start;
     }
 
-    .result-label { font-size: 12px; color: var(--gray-3); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
-    .result-type { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; }
-    .result-subname { font-size: 15px; color: var(--gray-3); margin-bottom: 20px; }
+    .result-left {
+      flex: 1; display: flex; flex-direction: column; align-items: flex-start;
+    }
+
+    .result-mbti-label { font-size: 13px; color: var(--gray-3); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
+    .result-label { font-size: 13px; color: var(--gray-3); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+    .result-mbti-type { font-size: 34px; font-weight: 800; letter-spacing: -1px; line-height: 1; margin-bottom: 10px; }
+    .result-char-name { font-size: 32px; font-weight: 700; margin-bottom: 4px; }
+    .result-subname { font-size: 13px; color: var(--gray-3); margin-bottom: 0; }
+
+    .result-right {
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    .result-char-frame {
+      width: 160px; height: 160px; background: var(--gray-1);
+      border-radius: 28px; display: flex; align-items: center; justify-content: center;
+      font-size: 60px; margin-bottom: 0; overflow: hidden;
+    }
 
     .result-match-bar {
       display: flex; align-items: center; gap: 10px;
@@ -202,17 +238,30 @@
   <!-- ═══ 封面页 ═══ -->
   <div id="page-cover">
     <div class="cover-title-wrap">
-      <div class="cover-logo">⚔️</div>
+      <div class="cover-logo"><img src="img/ETERNUM2.png" alt=""></div>
       <div class="cover-title">永恒世界</div>
       <div class="cover-subtitle">角色羁绊测试</div>
     </div>
-    <p class="cover-desc">在黑脊镇的冒险中，你与谁最投缘？<br>12道题，测出你在永恒世界中的灵魂羁绊。</p>
-    <div class="cover-tags">
-      <span class="tag">南希</span><span class="tag">亚历克斯</span>
-      <span class="tag">安妮</span><span class="tag">露娜</span>
-      <span class="tag">达莉亚</span><span class="tag">诺娃</span>
-      <span class="tag">佩妮洛普</span><span class="tag">卡吕普索</span>
-      <span class="tag">常</span>
+    <p class="cover-desc">在克雷顿的冒险中，你与谁最投缘？<br>12道题，测出你在永恒世界中的灵魂羁绊。</p>
+    <div class="cover-scroll">
+      <div class="scroll-track">
+        <div class="scroll-item"><img src="img/安妮.png" alt="安妮"><span>安妮</span></div>
+        <div class="scroll-item"><img src="img/达莉亚.png" alt="达莉亚"><span>达莉亚</span></div>
+        <div class="scroll-item"><img src="img/卡吕普索.png" alt="卡吕普索"><span>卡吕普索</span></div>
+        <div class="scroll-item"><img src="img/露娜.png" alt="露娜"><span>露娜</span></div>
+        <div class="scroll-item"><img src="img/南希.png" alt="南希"><span>南希</span></div>
+        <div class="scroll-item"><img src="img/诺娃.png" alt="诺娃"><span>诺娃</span></div>
+        <div class="scroll-item"><img src="img/佩妮洛普.png" alt="佩妮洛普"><span>佩妮洛普</span></div>
+        <div class="scroll-item"><img src="img/亚历克斯.png" alt="亚历克斯"><span>亚历克斯</span></div>
+        <div class="scroll-item"><img src="img/安妮.png" alt="安妮"><span>安妮</span></div>
+        <div class="scroll-item"><img src="img/达莉亚.png" alt="达莉亚"><span>达莉亚</span></div>
+        <div class="scroll-item"><img src="img/卡吕普索.png" alt="卡吕普索"><span>卡吕普索</span></div>
+        <div class="scroll-item"><img src="img/露娜.png" alt="露娜"><span>露娜</span></div>
+        <div class="scroll-item"><img src="img/南希.png" alt="南希"><span>南希</span></div>
+        <div class="scroll-item"><img src="img/诺娃.png" alt="诺娃"><span>诺娃</span></div>
+        <div class="scroll-item"><img src="img/佩妮洛普.png" alt="佩妮洛普"><span>佩妮洛普</span></div>
+        <div class="scroll-item"><img src="img/亚历克斯.png" alt="亚历克斯"><span>亚历克斯</span></div>
+      </div>
     </div>
     <button class="btn-start" onclick="startQuiz()">开始测试</button>
   </div>
@@ -244,11 +293,16 @@
       <span id="result-date"></span>
     </div>
     <div class="result-hero">
-      <div class="result-char-frame" id="result-char-frame">🌿</div>
-      <div class="result-label">你的羁绊角色</div>
-      <div class="result-type" id="result-type">—</div>
-      <div class="result-subname" id="result-subname">—</div>
-      <div class="result-match-bar" id="result-match-bar"></div>
+      <div class="result-left">
+        <div class="result-mbti-label">你的MBTI</div>
+        <div class="result-mbti-type" id="result-mbti-type">—</div>
+        <div class="result-label">你的羁绊角色</div>
+        <div class="result-char-name" id="result-char-name">—</div>
+        <div class="result-subname" id="result-subname">—</div>
+      </div>
+      <div class="result-right">
+        <div class="result-char-frame" id="result-char-frame"></div>
+      </div>
     </div>
     <div class="result-quote" id="result-quote"></div>
     <div class="traits">
@@ -273,7 +327,7 @@
     // ═══════════════════════════════════════════════════════════════════
     const questions = [
       {
-        char: '🔥', bubble: '极限挑战～',
+        char: '🔥', bubble: '我们至今仍未知道烧烤味蛋白粉好不好喝',
         text: '达莉亚约你去新开的极限运动馆，面对高空项目，你的想法是？',
         options: [
           { key: 'A', text: '有点担心安全，会详细询问设施和教练资质，再做决定。', dim: 'S-J' },
@@ -283,68 +337,68 @@
         ]
       },
       {
-        char: '👑', bubble: '解读一下她的意图～',
+        char: '👑', bubble: '豆瓣上对永恒世界的分类是第一人称射击',
         text: '公主卡吕普索在一个普通的清晨，单独邀请你共进早餐。这略显突兀的邀请，让你首先倾向于认为她的主要意图是：',
         options: [
           { key: 'A', text: '这可能是皇室某种惯例性社交，或她今日恰好需要个早餐伙伴。', dim: 'T' },
           { key: 'B', text: '她遇到了某些私人困扰，需要找一个绝对信任的人倾诉。', dim: 'F' },
           { key: 'C', text: '她对你有好感，想借这个私密机会多了解你。', dim: 'F' },
-          { key: 'D', text: '永恒世界中重要人物的变动可能对王国造成威胁，她在评估或拉拢你这股重要力量。', dim: 'N' }
+          { key: 'D', text: '永恒世界中重要人物的变动可能对王国造成威胁，她需要你这股重要力量。', dim: 'N' }
         ]
       },
       {
-        char: '🎋', bubble: '你的第一反应？',
+        char: '🎋', bubble: '安妮9岁看小黄人和冰雪奇缘(2013),可能是04年人',
         text: '无意中发现安妮写满你心事的日记本，你会？',
         options: [
           { key: 'A', text: '放回原处，但心里感到很温暖，对她的感情更确定。', dim: 'F-J' },
           { key: 'B', text: '立刻合上放回，当作没看见，尊重隐私。', dim: 'T-J' },
-          { key: 'C', text: '非常纠结，最终可能看一点，但之后会找机会坦白。', dim: 'F-P' },
+          { key: 'C', text: '非常纠结，最终可能看一点，但之后会找机会询问。', dim: 'F-P' },
           { key: 'D', text: '心跳加速，忍不住小心翻阅，想了解更多。', dim: 'P' }
         ]
       },
       {
-        char: '🌙', bubble: '哪个场景真的吓到你了？',
+        char: '🌙', bubble: '球球Caribdis别突脸吓人了',
         text: '在弗林克那栋诡异的房子里，哪个场景最让你后背发凉？',
         options: [
-          { key: 'A', text: '路灯下，那个哭泣的小女孩，毫无征兆地猛然回头看你。', dim: 'N' },
-          { key: 'B', text: '墙上的老挂钟，指针滴答作响，钟摆的节奏越来越诡异。', dim: 'N' },
-          { key: 'C', text: '眼前那条黝黑、深邃、仿佛没有尽头的走廊。', dim: 'S' },
+          { key: 'A', text: '路灯下，那个哭泣的小女孩，毫无征兆地猛然回头看你。', dim: 'S' },
+          { key: 'B', text: '四周一片寂静，只有墙上老挂钟发出诡异钟摆声。', dim: 'N' },
+          { key: 'C', text: '眼前那条黝黑、深邃、仿佛没有尽头的走廊。', dim: 'N' },
           { key: 'D', text: '昏暗客厅里，突然响起的刺耳电话铃声。', dim: 'S' }
         ]
       },
       {
-        char: '💎', bubble: '面对突发状况……',
+        char: '💎', bubble: '诺娃的眼罩是在左还是右？眼睛是什么颜色？',
         text: '诺娃的电脑在破解关键密码时突然蓝屏，数据可能丢失，她急哭了，你会？',
         options: [
-          { key: 'A', text: '保持冷静，尝试各种重启和恢复方法，告诉她"一定有办法"。', dim: 'T' },
-          { key: 'B', text: '一边轻拍她的背安抚，一边大脑飞速思考可能的解决方案。', dim: 'T/F' },
+          { key: 'A', text: '保持冷静，告诉她"别急，我们一起重新找，一定有办法"。', dim: 'F' },
+          { key: 'B', text: '一边安抚，一边大脑飞速思考可能的解决方案。', dim: 'T' },
           { key: 'C', text: '开个玩笑缓解气氛："看来你的电脑也觉得这密码太难为人了。"', dim: 'T' },
-          { key: 'D', text: '先抱住她安慰："别急，数据没了我们可以一起重新找。"', dim: 'F' }
+          { key: 'D', text: '知道自己可能帮不上忙，先抱住她安慰等她情绪稳定。', dim: 'F' }
         ]
       },
       {
-        char: '🔥', bubble: '最后一搏！',
+        char: '🔥', bubble: '佩妮和达利亚小时候是双马尾，南希年轻时也是！',
         text: '格斗训练中被达莉亚击倒，她得意地笑，你会？',
         options: [
-          { key: 'A', text: '迅速起身，眼神锐利，准备再战。', dim: 'E' },
+          { key: 'A', text: '迅速起身，眼神锐利，准备再战。', dim: 'T' },
           { key: 'B', text: '笑着认输，夸她进步真大。', dim: 'F' },
-          { key: 'C', text: '假装受伤不起，逗她过来查看。', dim: 'I' },
-          { key: 'D', text: '躺地上耍赖："刚才地滑，不算！"', dim: 'E' }
+          { key: 'C', text: '假装受伤不起，逗她过来查看。', dim: 'N-P' },
+          { key: 'D', text: '躺地上耍赖："刚才地滑，不算！"', dim: 'E-P' }
         ]
       },
       {
-        char: '🌙', bubble: '认真思考一下哦～',
-        text: '露娜突然一脸认真地问你"人类存在的意义是什么"，你正在擦武器，会怎么回答？',
+        char: '🌙', bubble: '那天露娜到底看到了什么？',
+        text: '露娜突然一脸认真地问你"人类存在的意义是什么"，你正在吃东西，会怎么回答？',
         options: [
           { key: 'A', text: '停下动作，认真思考后给出一个自己认为合理的答案。', dim: 'T' },
           { key: 'B', text: '坦白自己不知道，并反问她："你觉得呢？我想听听你的。"', dim: 'N-P' },
           { key: 'C', text: '看着她，觉得她思考的样子很美，说："你的存在就是意义。"', dim: 'F' },
-          { key: 'D', text: '觉得这问题太大，笑着拉她去吃好吃的："为了这个！"', dim: 'S-P' }
+          { key: 'D', text: '觉得这问题太严肃了，笑着给她分享好吃的："为了这个！"', dim: 'S-P' }
         ]
       },
       {
-        char: '💎', bubble: '仔细感受一下……',
-        text: '诺娃邀请你进入她构建的虚拟现实空间。当你戴上设备，眼前景象稳定后，你首先注意到并最感兴趣的是：',
+        char: '💎', bubble: '餐厅里不要调戏服务员哦~发现安妮灰掉就晚了',
+        text: '安妮邀请你第一次进入永恒世界。当你戴上设备，眼前景象稳定后，你首先注意到并最感兴趣的是：',
         options: [
           { key: 'A', text: '空间中流动的、构成一切基础的复杂数据代码和几何框架。', dim: 'N' },
           { key: 'B', text: '由光线与色彩构成的、令人屏息的绝美景观，仿佛置身童话。', dim: 'S' },
@@ -353,7 +407,7 @@
         ]
       },
       {
-        char: '🌿', bubble: '跟随直觉～',
+        char: '🌿', bubble: '健身和瑜伽都要量力而行，循序渐进',
         text: '和南希一起上瑜伽课，她向其他学员夸赞你的身材，并自然地抚摸你的肩膀，你会？',
         options: [
           { key: 'A', text: '很享受这一刻，觉得这是你们默契的表现，并希望可以多停留一会。', dim: 'I-F' },
@@ -363,33 +417,33 @@
         ]
       },
       {
-        char: '🎋', bubble: '你会怎么处理？',
+        char: '🎋', bubble: '亡灵节是墨西哥的传统节日，在每年的11月1和2日',
         text: '和露娜参加完亡灵节聚会后，你收到了她发来的合影，照片里你们笑得很开心。这时安妮路过看到了，你会？',
         options: [
-          { key: 'A', text: '只是简单给她看一眼，然后继续低头看着照片，回味当时的瞬间。', dim: 'I-P' },
-          { key: 'B', text: '把手机稍微移开一点，对安妮笑笑："要看看吗？不过还是和你去那个餐厅拍得最好。"', dim: 'F-J' },
-          { key: 'C', text: '自然地收起手机，转而问她："安妮，你上次说的那家新甜品店，我们周末去试试？"', dim: 'J' },
-          { key: 'D', text: '兴奋地招呼她："安妮快看！我们今天的装扮怎么样？"', dim: 'E-P' }
+          { key: 'A', text: '担心安妮误会，急忙解释这是和露娜在亡灵节的合照。', dim: 'I-F' },
+          { key: 'B', text: '把手机稍微移开一点，告诉安妮今天的所见所闻。', dim: 'F-J' },
+          { key: 'C', text: '自然地收起手机，邀请安妮去那家新甜品店。', dim: 'J' },
+          { key: 'D', text: '兴奋地招呼她："安妮快看！我今天的装扮怎么样？"', dim: 'E-P' }
         ]
       },
       {
-        char: '💎', bubble: '你最需要哪种伙伴？',
+        char: '💎', bubble: 'dy关注 @西罗马帝国摄像头 欢迎提建议聊反馈:)',
         text: '进入了一个危险未知的隐藏关卡，你更希望身边是哪种类型的伙伴？',
         options: [
           { key: 'A', text: '亚历克斯那样的探索家，随性洒脱，总能发现意想不到的路径或彩蛋。', dim: 'N-P' },
-          { key: 'B', text: '诺娃那样的技术专家，能破解机关，提供最安全的行动路线。', dim: 'I' },
+          { key: 'B', text: '诺娃那样的技术专家，能破解机关谜题，提供最安全的行动路线。', dim: 'I' },
           { key: 'C', text: '达莉亚那样的行动派，身手敏捷，遇到战斗能第一时间并肩作战。', dim: 'E' },
-          { key: 'D', text: '佩妮洛普那样的气氛担当，即使面对危险也能用吐槽化解紧张。', dim: 'E' }
+          { key: 'D', text: '安妮那样的战力担当，面对任何危险都能用核爆化解。', dim: 'J' }
         ]
       },
       {
         char: '🌿', bubble: '最后一步～',
-        text: '结束了一天的冒险，你回到黑脊镇，这时你的手机同时亮起，你会优先处理哪条信息？',
+        text: '结束了一天的冒险，你回到现实中的克雷顿，这时你的手机同时亮起，你会优先处理哪条信息？',
         options: [
-          { key: 'A', text: '把游戏音乐开大，专心整理和清点一下今天的物资掉落。', dim: 'I' },
-          { key: 'B', text: '无人打扰，独自回公寓打理鱼缸，顺便上线钓会儿鱼。', dim: 'I' },
-          { key: 'C', text: '南希发来的"楼下新开了家不错的咖啡馆，要不要一起去坐坐？"', dim: 'E' },
-          { key: 'D', text: '公会伙伴的"全服BOSS战缺人，速来！"', dim: 'E' }
+          { key: 'A', text: '闭上眼睛休息一下，梳理一下游戏中发生的事情。', dim: 'J' },
+          { key: 'B', text: '无人能打扰，先吃点东西恢复一下精力。', dim: 'P' },
+          { key: 'C', text: '南希去楼下新开了家不错的咖啡馆一起坐坐', dim: 'I' },
+          { key: 'D', text: '佩妮洛普邀请你参加今晚的派对', dim: 'E' }
         ]
       }
     ];
@@ -413,22 +467,22 @@
     // MBTI 匹配表（16种 → 角色 + 羁绊指数 + 解读）
     // ═══════════════════════════════════════════════════════════════════
     const matchTable = {
-      'ISTJ':  { char: '达莉亚',   img: '达莉亚.png', slogan: '你是我的静默堡垒，我是你的狂野风暴，我们的爱如肋排般炙热且真实。', desc: '你像一本严谨的行动指南，沉默寡言却总能精准接住她的疲惫；她则是燃烧的火焰，带着烧烤肋排的烟火气和苏门答腊虎般的野性闯入你的生活。看似冰与火的碰撞，实则是你坚实的后背托举起她的肆意张扬。当你在健身房角落默默注视她挥汗如雨，她反手将毛巾甩在他脸上说"别看了，来打一场"，这种无需言语的默契，是理性与激情的完美共舞。' },
-      'ISFJ':  { char: '佩妮洛普', img: '佩妮洛普.png', slogan: '你是我喧嚣世界里的静谧港湾，我是你卸下防备后的璀璨星光。', desc: '你像一张柔软的毛毯，总是细致地记住佩妮对烤三文鱼的全熟要求；她则是聚光灯下的焦点，带着火烈鸟般的明艳与美貌之外的荒诞幽默，让她在任何场合都闪闪发光。你用温柔的目光追随她的光芒，而她享受着他独一无二的注视。当喧嚣散去，她卸下精致的妆容，窝在你怀里吐槽晚宴的无聊，这是最深沉的守护与最真挚的陪伴。' },
-      'ESTP':  { char: '安妮',     img: '安妮.png', slogan: '你是我的宇宙级冒险，我是你的专属避风港，我们一起穿越虫洞。', desc: '你是冲锋陷阵的探险家，而她是永远的后勤部长。你带着芝士蛋糕的甜味闯入她的生活，打破了她对世界的懵懂认知；她则用柔软与必要的刚强包容你的鲁莽。在太空站的生死危机中，是你拉着她狂奔，而她颤抖着递上的氧气瓶，比任何誓言都动人。这种关系充满了直球式的浪漫与过命的交情，是肾上腺素与安全感的交织。' },
-      'ISTP':  { char: '常',      img: '常.png', slogan: '无需多言的兄弟情，你懂我的沉默，我挺你的每一次疯狂。', desc: '他们像两把锋利的刀，不需要过多的言语就能切开生活的迷雾。作为兄弟，常从不抢戏，却在你需要时默默递上一瓶酒；而你懂他的沉默，更懂他藏在风趣随和下的孤独。他是你最铁的哥们，陪你打游戏、看比赛，在你失恋时二话不说把你从酒吧扛回家。这种关系没有矫情，只有"我懂你"的硬核浪漫。' },
-      'INFP':  { char: '露娜',    img: '露娜.png', slogan: '我们是彼此深渊里的微光，懂你的暗黑，也爱你隐藏的温柔。', desc: '你们像两面镜子，映照出彼此内心深处最幽微的角落。你读懂了她偏爱《七宗罪》背后的那份暗黑浪漫，也理解软萌无害的外表下会向往那种既危险又迷人的动物。在别人眼中，你们都是难以捉摸的谜，但在彼此面前，你们可以卸下所有伪装。当她穿着白毛衣，轻轻触碰你的手背，无需言语，那种灵魂共振的默契，足以抵御世间所有的喧嚣。' },
-      'ENFP':  { char: '南希',    img: '南希.png', slogan: '你是我平淡岁月里的最盛大的烟火，映出最美好的我们，偷走我的心。', desc: '你是她平静生活里突然闯入的一阵旋风，融化了她岁月之下的稳重。她看着你像看着一场盛大的烟火，既欣赏你的活力，又默默为你收拾残局。当她在深夜为你整理衣领，你突然凑上去亲吻她的额头，那一刻，她压抑已久的情感彻底沦陷在你直截了当的攻势下，原来成熟女性的温柔，也可以被你轻易点燃。' },
-      'INTJ':  { char: '卡吕普索', img: '卡吕普索.png', slogan: '傲娇公主遇上腹黑骑士，强强联手，才是这世上最配的棋局。', desc: '你们是棋逢对手的对手，也是志同道合的知己。她是离家出走的精灵公主，傲娇和高冷曾让你吃尽苦头，但你用如《指环王》的史诗感和威严，一步步撬开了她的心房。当她终于放下身段，笨拙地为你包扎伤口，你轻抚她的脸颊说"我等你很久了"，那一刻，两个高傲的灵魂终于找到了可以并肩作战的支点。' },
-      'ENTJ':  { char: '诺娃',    img: '诺娃.png', slogan: '铁血指挥官与天才黑客，你负责征服世界，我负责守护你的疯狂。', desc: '你是天生的指挥家，而她是游离于规则之外的天才。你欣赏她戴着眼罩的特工气质，也纵容她对《黑客帝国》的痴迷。在别人眼里，你强势到不留余地，但在她面前，你愿意为她放慢脚步，听她讲解那些天马行空的对世界的理解。当她在危机时刻冷静地破解密码，你看着她，眼神里满是骄傲——原来，你的软肋，早已成了她。' },
-      'INFJ':  { char: '南希',    img: '南希.png', slogan: '我们是彼此的镜像与归处，无需言语的懂得，是最顶级的浪漫。', desc: '你们是灵魂的双生子，是彼此不言而喻的港湾。你总能提前感受到她未曾说出口的疲惫，而她会在你为未来迷茫时，恰到好处地点一盏茶，用那份沉静的温柔为你托底。深夜的客厅里，你们或许只是安静地各自看书，但一个眼神的交汇，就胜过千言万语。她不会问你为何深夜不归，只会等你回来，用一句"辛苦了"卸下你所有的防备。' },
-      'ENFJ':  { char: '露娜',    img: '露娜.png', slogan: '你是我的光，让我敢于在阳光下，展现我灵魂深处所有的褶皱与斑斓。', desc: '你是将她从自我孤岛中引领出来的那束光。她习惯性地缩在角落里，用悬疑小说的复杂暗喻包裹自己，而你总能看到那层外壳下纯粹又易碎的内心。在亡灵派对上，鼓励她摘下手套，不是为了改变她，而是让她知道，她那些被视为怪异的敏感与深邃，在你眼中是世间最珍贵的宝藏。当她终于在谷仓的阴影里，用颤抖的声音对你诉说过往，你拥抱的，是整个世界的信任。' },
-      'INTP':  { char: '诺娃',    img: '诺娃.png', slogan: '我们是彼此的思维迷宫，在逻辑的宇宙里碰撞，是最高智商的浪漫。', desc: '你们的关系是一场永不厌倦的脑力追逐。别人觉得她戴着眼罩是扮酷，只有你理解那是她与外界信息保持距离、构建内在逻辑体系的方式。你们可以就一个战术方案或哲学悖论辩论到深夜，火花四溅，又乐在其中。在你眼中，她那些"不合时宜"的直率和抽离，恰恰是天才最迷人的棱角。当你疲惫于外界的琐碎，回到她身边，那无需社交的、各自沉浸思考的沉默，便是最自在的充电。' },
-      'ENTP':  { char: '卡吕普索', img: '卡吕普索.png', slogan: '我们的爱情是一场高智商博弈，是棋逢对手，更是灵魂的精准制导。', desc: '你和她是针锋相对又势均力敌的欢喜冤家。你热衷于用各种奇谈怪论和挑衅，去戳破她公主那层高贵又脆弱的"礼仪"外壳，看她气急败坏又无可奈何的样子。而她，则用她精准到冷酷的逻辑和长远布局，一次次将你天马行空的想法拉回现实，甚至为你补上致命的漏洞。你们的关系与其说是恋人，不如说是最了解对方弱点、也最信任对方能力的战略同盟。' },
-      'ESFP':  { char: '安妮',    img: '安妮.png', slogan: '我带你看遍世界繁华，你是我每次冒险归来，灯火通明的家。', desc: '你就是她的小太阳，用最热烈的行动点燃她的生活。她会在你每个心血来潮的冒险后，默默收拾"残局"，眼里却闪着为你骄傲的光。你的存在，让她的世界从安稳的小窝，变成了充满惊喜的游乐场。当你拉着她冲向太空舱，在失重中她紧紧攥着你的手尖叫又大笑，那一刻，你给她的不止是刺激，更是"有我在"的绝对安全感。她是你的定心丸，而你是她勇敢的理由。' },
-      'ESFJ':  { char: '亚历克斯', img: '亚历克斯.png', slogan: '我愿用全部的温暖，拥抱你身上每一根带刺的棱角，直至它们化为温柔。', desc: '你像一团温暖而不灼人的火，悄然融化着她用纹身和冷酷表情筑起的心墙。别人只看到她叛逆不羁的刺，而你总能第一个发现她生病时强撑的脆弱，并"蛮横"地带去毯子和药。你用无微不至的关怀，为她构建了一个无需戒备的港湾。当她终于卸下防备，在只属于你们的小天地里对你露出毫无保留的微笑，你知道，你赢得了这个世界上最珍贵的信任。' },
-      'ISFP':  { char: '佩妮洛普', img: '佩妮洛普.png', slogan: '在浮华世界的背面，我们共享一杯沉默，和一个真实的灵魂。', desc: '你们是彼此最懂"美"的鉴赏家。你能看穿她华服与光环下的疲惫，欣赏她不为人知的、静谧的孤独。而她，则迷恋于你眼中那个剥离了美丽外表标签后，真实的她。在炫目的派对角落，你们能共享一杯酒，无需言语，只用眼神交流对这场喧嚣的揶揄。你为她挡开不怀好意的目光，她则在只有你们二人时，对你展露最松弛、也最生动的笑容。' },
-      'ESTJ':  { char: '亚历克斯', img: '亚历克斯.png', slogan: '我是你混乱世界的秩序，而你，是我严谨人生中最绚烂的意外。', desc: '你像一位可靠的船长，为她这艘看似随性漂泊的孤舟，提供了坚定的航向与港湾。你欣赏她充满生命力的野性，并用你的果决与担当，为这份野性保驾护航。当她在冲突中本能地竖起尖刺，你并非压制，而是用更坚实的臂膀站在她身前，用行动告诉她"这事交给我"。你的可靠，让她可以安心地偶尔收起利爪，展现内里的柔软。你们是秩序与不羁的完美互补。' }
+      'ISTJ':  { char: '达莉亚',   img: '达莉亚.png', slogan: '<em>你是我的静默堡垒，我是你的狂野风暴，我们的爱如肋排般炙热且真实。</em>', desc: '你像一本严谨的行动指南，沉默寡言却总能精准接住她的疲惫；她则是燃烧的火焰，带着烧烤肋排的烟火气和苏门答腊虎般的野性闯入你的生活。看似冰与火的碰撞，实则是你坚实的后背托举起她的肆意张扬。当你在健身房角落默默注视她挥汗如雨，她反手将毛巾甩在他脸上说"别看了，来打一场"，这种无需言语的默契，是理性与激情的完美共舞。' },
+      'ISFJ':  { char: '佩妮洛普', img: '佩妮洛普.png', slogan: '<em>你是我喧嚣世界里的静谧港湾，我是你卸下防备后的璀璨星光。</em>', desc: '你像一张柔软的毛毯，总是细致地记住佩妮对烤三文鱼的全熟要求；她则是聚光灯下的焦点，带着火烈鸟般的明艳与美貌之外的荒诞幽默，让她在任何场合都闪闪发光。你用温柔的目光追随她的光芒，而她享受着他独一无二的注视。当喧嚣散去，她卸下精致的妆容，窝在你怀里吐槽晚宴的无聊，这是最深沉的守护与最真挚的陪伴。' },
+      'ESTP':  { char: '安妮',     img: '安妮.png', slogan: '<em>你是我的宇宙级冒险，我是你的专属避风港，我们一起穿越虫洞。</em>', desc: '你是冲锋陷阵的探险家，而她是永远的后勤部长。你带着芝士蛋糕的甜味闯入她的生活，打破了她对世界的懵懂认知；她则用柔软与必要的刚强包容你的鲁莽。在太空站的生死危机中，是你拉着她狂奔，而她颤抖着递上的氧气瓶，比任何誓言都动人。这种关系充满了直球式的浪漫与过命的交情，是肾上腺素与安全感的交织。' },
+      'ISTP':  { char: '常',      img: '常.png', slogan: '<em>无需多言的兄弟情，你懂我的沉默，我挺你的每一次疯狂。</em>', desc: '他们像两把锋利的刀，不需要过多的言语就能切开生活的迷雾。作为兄弟，常从不抢戏，却在你需要时默默递上一瓶酒；而你懂他的沉默，更懂他藏在风趣随和下的孤独。他是你最铁的哥们，陪你打游戏、看比赛，在你失恋时二话不说把你从酒吧扛回家。这种关系没有矫情，只有"我懂你"的硬核浪漫。' },
+      'INFP':  { char: '露娜',    img: '露娜.png', slogan: '<em>我们是彼此深渊里的微光，懂你的暗黑，也爱你隐藏的温柔。</em>', desc: '你们像两面镜子，映照出彼此内心深处最幽微的角落。你读懂了她偏爱《七宗罪》背后的那份暗黑浪漫，也理解软萌无害的外表下会向往那种既危险又迷人的动物。在别人眼中，你们都是难以捉摸的谜，但在彼此面前，你们可以卸下所有伪装。当她穿着白毛衣，轻轻触碰你的手背，无需言语，那种灵魂共振的默契，足以抵御世间所有的喧嚣。' },
+      'ENFP':  { char: '南希',    img: '南希.png', slogan: '<em>你是我平淡岁月里的最盛大的烟火，映出最美好的我们，偷走我的心。</em>', desc: '你是她平静生活里突然闯入的一阵旋风，融化了她岁月之下的稳重。她看着你像看着一场盛大的烟火，既欣赏你的活力，又默默为你收拾残局。当她在深夜为你整理衣领，你突然凑上去亲吻她的额头，那一刻，她压抑已久的情感彻底沦陷在你直截了当的攻势下，原来成熟女性的温柔，也可以被你轻易点燃。' },
+      'INTJ':  { char: '卡吕普索', img: '卡吕普索.png', slogan: '<em>傲娇公主遇上腹黑骑士，强强联手，才是这世上最配的棋局。</em>', desc: '你们是棋逢对手的对手，也是志同道合的知己。她是离家出走的精灵公主，傲娇和高冷曾让你吃尽苦头，但你用如《指环王》的史诗感和威严，一步步撬开了她的心房。当她终于放下身段，笨拙地为你包扎伤口，你轻抚她的脸颊说"我等你很久了"，那一刻，两个高傲的灵魂终于找到了可以并肩作战的支点。' },
+      'ENTJ':  { char: '诺娃',    img: '诺娃.png', slogan: '<em>铁血指挥官与天才黑客，你负责征服世界，我负责守护你的疯狂。</em>', desc: '你是天生的指挥家，而她是游离于规则之外的天才。你欣赏她戴着眼罩的特工气质，也纵容她对《黑客帝国》的痴迷。在别人眼里，你强势到不留余地，但在她面前，你愿意为她放慢脚步，听她讲解那些天马行空的对世界的理解。当她在危机时刻冷静地破解密码，你看着她，眼神里满是骄傲——原来，你的软肋，早已成了她。' },
+      'INFJ':  { char: '南希',    img: '南希.png', slogan: '<em>我们是彼此的镜像与归处，无需言语的懂得，是最顶级的浪漫。</em>', desc: '你们是灵魂的双生子，是彼此不言而喻的港湾。你总能提前感受到她未曾说出口的疲惫，而她会在你为未来迷茫时，恰到好处地点一盏茶，用那份沉静的温柔为你托底。深夜的客厅里，你们或许只是安静地各自看书，但一个眼神的交汇，就胜过千言万语。她不会问你为何深夜不归，只会等你回来，用一句"辛苦了"卸下你所有的防备。' },
+      'ENFJ':  { char: '露娜',    img: '露娜.png', slogan: '<em>你是我的光，让我敢于在阳光下，展现我灵魂深处所有的褶皱与斑斓。</em>', desc: '你是将她从自我孤岛中引领出来的那束光。她习惯性地缩在角落里，用悬疑小说的复杂暗喻包裹自己，而你总能看到那层外壳下纯粹又易碎的内心。在亡灵派对上，鼓励她摘下手套，不是为了改变她，而是让她知道，她那些被视为怪异的敏感与深邃，在你眼中是世间最珍贵的宝藏。当她终于在谷仓的阴影里，用颤抖的声音对你诉说过往，你拥抱的，是整个世界的信任。' },
+      'INTP':  { char: '诺娃',    img: '诺娃.png', slogan: '<em>我们是彼此的思维迷宫，在逻辑的宇宙里碰撞，是最高智商的浪漫。</em>', desc: '你们的关系是一场永不厌倦的脑力追逐。别人觉得她戴着眼罩是扮酷，只有你理解那是她与外界信息保持距离、构建内在逻辑体系的方式。你们可以就一个战术方案或哲学悖论辩论到深夜，火花四溅，又乐在其中。在你眼中，她那些"不合时宜"的直率和抽离，恰恰是天才最迷人的棱角。当你疲惫于外界的琐碎，回到她身边，那无需社交的、各自沉浸思考的沉默，便是最自在的充电。' },
+      'ENTP':  { char: '卡吕普索', img: '卡吕普索.png', slogan: '<em>我们的爱情是一场高智商博弈，是棋逢对手，更是灵魂的精准制导。</em>', desc: '你和她是针锋相对又势均力敌的欢喜冤家。你热衷于用各种奇谈怪论和挑衅，去戳破她公主那层高贵又脆弱的"礼仪"外壳，看她气急败坏又无可奈何的样子。而她，则用她精准到冷酷的逻辑和长远布局，一次次将你天马行空的想法拉回现实，甚至为你补上致命的漏洞。你们的关系与其说是恋人，不如说是最了解对方弱点、也最信任对方能力的战略同盟。' },
+      'ESFP':  { char: '安妮',    img: '安妮.png', slogan: '<em>我带你看遍世界繁华，你是我每次冒险归来，灯火通明的家。</em>', desc: '你就是她的小太阳，用最热烈的行动点燃她的生活。她会在你每个心血来潮的冒险后，默默收拾"残局"，眼里却闪着为你骄傲的光。你的存在，让她的世界从安稳的小窝，变成了充满惊喜的游乐场。当你拉着她冲向太空舱，在失重中她紧紧攥着你的手尖叫又大笑，那一刻，你给她的不止是刺激，更是"有我在"的绝对安全感。她是你的定心丸，而你是她勇敢的理由。' },
+      'ESFJ':  { char: '亚历克斯', img: '亚历克斯.png', slogan: '<em>我愿用全部的温暖，拥抱你身上每一根带刺的棱角，直至它们化为温柔。</em>', desc: '你像一团温暖而不灼人的火，悄然融化着她用纹身和冷酷表情筑起的心墙。别人只看到她叛逆不羁的刺，而你总能第一个发现她生病时强撑的脆弱，并"蛮横"地带去毯子和药。你用无微不至的关怀，为她构建了一个无需戒备的港湾。当她终于卸下防备，在只属于你们的小天地里对你露出毫无保留的微笑，你知道，你赢得了这个世界上最珍贵的信任。' },
+      'ISFP':  { char: '佩妮洛普', img: '佩妮洛普.png', slogan: '<em>在浮华世界的背面，我们共享一杯沉默，和一个真实的灵魂。</em>', desc: '你们是彼此最懂"美"的鉴赏家。你能看穿她华服与光环下的疲惫，欣赏她不为人知的、静谧的孤独。而她，则迷恋于你眼中那个剥离了美丽外表标签后，真实的她。在炫目的派对角落，你们能共享一杯酒，无需言语，只用眼神交流对这场喧嚣的揶揄。你为她挡开不怀好意的目光，她则在只有你们二人时，对你展露最松弛、也最生动的笑容。' },
+      'ESTJ':  { char: '亚历克斯', img: '亚历克斯.png', slogan: '<em>我是你混乱世界的秩序，而你，是我严谨人生中最绚烂的意外。</em>', desc: '你像一位可靠的船长，为她这艘看似随性漂泊的孤舟，提供了坚定的航向与港湾。你欣赏她充满生命力的野性，并用你的果决与担当，为这份野性保驾护航。当她在冲突中本能地竖起尖刺，你并非压制，而是用更坚实的臂膀站在她身前，用行动告诉她"这事交给我"。你的可靠，让她可以安心地偶尔收起利爪，展现内里的柔软。你们是秩序与不羁的完美互补。' }
     };
 
     // ═══════════════════════════════════════════════════════════════════
@@ -453,13 +507,13 @@
       document.getElementById('quiz-counter').textContent = `${currentQ + 1} / ${total}`;
       document.getElementById('progress-fill').style.width = `${(currentQ / total) * 100}%`;
       document.getElementById('quiz-bubble').textContent = q.bubble;
-      // 定位跑动GIF到进度条前端（进度条有左右各20px padding）
+      // 定位跑动GIF到进度条最前端
       const wrap = document.getElementById('progress-wrap');
       const gif = document.getElementById('quiz-running-gif');
       const pct = currentQ / total;
       const wrapW = wrap.clientWidth;
-      // 进度条有效宽度 = wrapWidth - 40px（左右各20px padding）
-      gif.style.left = `${pct * (wrapW - 40) - 14}px`;
+      // 进度条有效宽度 = wrapWidth - 20px（左右各10px padding）
+      gif.style.left = `${pct * (wrapW - 20) + 7}px`;
       document.getElementById('question-text').textContent = q.text;
 
       const container = document.getElementById('options-container');
@@ -534,19 +588,14 @@
       const char = characters[match.char];
 
       document.getElementById('result-date').textContent = new Date().toLocaleDateString('zh-CN');
+      // 左侧
+      document.getElementById('result-mbti-type').textContent = type;
+      document.getElementById('result-char-name').textContent = match.char;
+      document.getElementById('result-subname').textContent = char.subname;
+      // 右侧
       document.getElementById('result-char-frame').innerHTML = `<img src="img/${match.img}" alt="${match.char}" style="width:100%;height:100%;object-fit:cover;border-radius:28px;">`;
-      document.getElementById('result-type').textContent = match.char;
-      document.getElementById('result-subname').textContent = `${type} · 你的MBTI`;
 
-      document.getElementById('result-match-bar').innerHTML = `
-        <img class="match-icon" src="img/${match.img}" alt="${match.char}" style="width:40px;height:40px;border-radius:10px;object-fit:cover;flex-shrink:0;">
-        <div class="match-info">
-          <div class="match-label">适配角色</div>
-          <div class="match-name">${match.char}</div>
-        </div>
-      `;
-
-      document.getElementById('result-quote').textContent = `「${match.slogan}」`;
+      document.getElementById('result-quote').innerHTML = `「${match.slogan}」`;
       document.getElementById('trait-list').innerHTML = char.traits.map(t => `<span class="trait-tag">${t}</span>`).join('');
       document.getElementById('result-desc-text').textContent = match.desc;
     }
