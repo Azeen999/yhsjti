@@ -763,6 +763,11 @@ S
           requestAnimationFrame(function() { requestAnimationFrame(r); });
         });
 
+        // 5. 隐藏按钮区域，截取到"关系解读"结束
+        const actionsEl = document.querySelector('.result-actions');
+        const originalDisplay = actionsEl ? actionsEl.style.display : '';
+        if (actionsEl) actionsEl.style.display = 'none';
+
         // 5. 截图
         const scale = (window.devicePixelRatio && window.devicePixelRatio > 1) ? 2 : 1;
         const canvas = await html2canvas(resultPage, {
@@ -775,6 +780,9 @@ S
           imageTimeout: 8000,
           removeContainer: true
         });
+
+        // 恢复按钮区域
+        if (actionsEl) actionsEl.style.display = originalDisplay;
 
         // 6. 转 blob 下载
         const blob = await new Promise(function(resolve, reject) {
