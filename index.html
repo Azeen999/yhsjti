@@ -315,11 +315,12 @@ S
       <div class="result-desc-text" id="result-desc-text"></div>
     </div>
     <div class="result-actions">
-      <button class="btn-share" onclick="shareResult()">分享结果</button>
+      <button class="btn-share" onclick="saveAsImage()">保存图片</button>
       <button class="btn-retry" onclick="retryQuiz()">重新测试</button>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
     // ═══════════════════════════════════════════════════════════════════
     // 12道题目（来自试题.md，适配MBTI维度AB二选一）
@@ -621,6 +622,181 @@ S
       const text = `我在永恒世界里测出了 ${type}，适配角色是 ${match.char}！⚔️ 「${match.slogan}」`;
       if (navigator.share) navigator.share({ title: '永恒世界角色羁绊测试', text });
       else navigator.clipboard.writeText(text).then(() => alert('已复制到剪贴板！'));
+    }
+
+    // ───────────────────────────────────────────────────────────────
+    // 图片转 Data URL（解决跨域）
+    // ───────────────────────────────────────────────────────────────
+    async function embedImagesAsDataUrl(root) {
+      const imgs = root.querySelectorAll('img');
+      await Promise.all(Array.from(imgs).map(async function(img) {
+        const src = img.getAttribute('src');
+        if (!src || src.startsWith('data:')) return;
+        try {
+          const abs = new URL(src, location.href).href;
+          const res = await fetch(abs, { cache: 'force-cache' });
+          const blob = await res.blob();
+          const dataUrl = await new Promise(function(resolve, reject) {
+            const r = new FileReader();
+            r.onloadend = function() { resolve(r.result); };
+            r.onerror = reject;
+            r.readAsDataURL(blob);
+          });
+          img.src = dataUrl;
+          if (typeof img.decode === 'function') { try { await img.decode(); } catch (_) {} }
+        } catch (e) {
+          console.warn('[YHSJTI] embed img fail, keep original', src, e);
+        }
+      }));
+    }
+
+    // ───────────────────────────────────────────────────────────────
+    // Canvas 预快照（移动端兼容）
+    // ───────────────────────────────────────────────────────────────
+    function snapshotCanvases(root) {
+      const swaps = [];
+      root.querySelectorAll('canvas').forEach(function(canvas) {
+        try {
+          if (!canvas.width || !canvas.height) return;
+          const dataUrl = canvas.toDataURL('image/png');
+          const img = new Image();
+          img.src = dataUrl;
+          img.alt = '';
+          img.setAttribute('aria-hidden', 'true');
+          const cs = window.getComputedStyle(canvas);
+          img.style.width = cs.width;
+          img.style.height = cs.height;
+          img.style.display = cs.display === 'inline' ? 'inline-block' : (cs.display || 'block');
+          img.style.verticalAlign = 'middle';
+          const parent = canvas.parentNode;
+          const next = canvas.nextSibling;
+          parent.replaceChild(img, canvas);
+          swaps.push({ canvas: canvas, img: img, parent: parent, next: next });
+        } catch (e) {
+          console.warn('[YHSJTI] canvas snapshot failed', e);
+        }
+      });
+      return function restore() {
+        swaps.forEach(function(s) {
+          if (!s.img.parentNode) return;
+          if (s.next && s.next.parentNode === s.parent) {
+            s.parent.insertBefore(s.canvas, s.next);
+          } else {
+            s.parent.appendChild(s.canvas);
+          }
+          s.img.remove();
+        });
+      };
+    }
+
+    // ───────────────────────────────────────────────────────────────
+    // 等待所有图片加载完成
+    // ───────────────────────────────────────────────────────────────
+    async function waitAllImagesReady(root) {
+      const imgs = Array.from(root.querySelectorAll('img'));
+      await Promise.all(imgs.map(function(img) {
+        const settled = (img.complete && img.naturalWidth > 0)
+          ? Promise.resolve()
+          : new Promise(function(resolve) {
+              const done = function() {
+                img.removeEventListener('load', done);
+                img.removeEventListener('error', done);
+                resolve();
+              };
+              img.addEventListener('load', done);
+              img.addEventListener('error', done);
+              setTimeout(done, 2000);
+            });
+        return settled.then(function() {
+          if (typeof img.decode === 'function') {
+            return img.decode().catch(function() {});
+          }
+        });
+      }));
+    }
+
+    // ───────────────────────────────────────────────────────────────
+    // 保存图片（借鉴 app.js 的完整实现）
+    // ───────────────────────────────────────────────────────────────
+    async function saveAsImage() {
+      const btn = document.querySelector('.btn-share');
+      const resultPage = document.getElementById('page-result');
+      if (!resultPage) return;
+
+      btn.textContent = '生成中...';
+      btn.disabled = true;
+
+      let restoreCanvases = function() {};
+
+      try {
+        // 1. 图片转 Data URL（解决跨域）
+        await embedImagesAsDataUrl(resultPage);
+
+        // 2. Canvas 预快照
+        restoreCanvases = snapshotCanvases(resultPage);
+
+        // 3. 等待所有图片加载完成
+        await waitAllImagesReady(resultPage);
+
+        // 4. 两个动画帧让布局稳定
+        await new Promise(function(r) {
+          requestAnimationFrame(function() { requestAnimationFrame(r); });
+        });
+
+        // 5. 截图
+        const scale = (window.devicePixelRatio && window.devicePixelRatio > 1) ? 2 : 1;
+        const canvas = await html2canvas(resultPage, {
+          backgroundColor: '#FFFFFF',
+          scale: scale,
+          useCORS: true,
+          allowTaint: false,
+          foreignObjectRendering: false,
+          logging: false,
+          imageTimeout: 8000,
+          removeContainer: true
+        });
+
+        // 6. 转 blob 下载
+        const blob = await new Promise(function(resolve, reject) {
+          canvas.toBlob(function(b) {
+            if (b) resolve(b); else reject(new Error('toBlob returned null'));
+          }, 'image/png');
+        });
+
+        const type = calcMBTI();
+        const match = matchTable[type] || matchTable['ISFJ'];
+        const filename = '永恒世界-羁绊测试-' + match.char + '-' + Date.now() + '.png';
+
+        const ua = (navigator.userAgent || '').toLowerCase();
+        const isIOS = /iphone|ipad|ipod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+        // iOS：弹出预览让用户长按保存
+        if (isIOS) {
+          const dataUrl = canvas.toDataURL('image/png');
+          const modal = document.createElement('div');
+          modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;';
+          modal.innerHTML = '<p style="color:#fff;margin-bottom:16px;font-size:14px;">长按图片保存到相册</p><img src="' + dataUrl + '" style="max-width:90%;max-height:80%;border-radius:12px;" />';
+          modal.onclick = function() { document.body.removeChild(modal); };
+          document.body.appendChild(modal);
+        } else {
+          // Android/Desktop：直接下载
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(function() { URL.revokeObjectURL(url); }, 4000);
+        }
+      } catch (err) {
+        console.error('[YHSJTI] saveAsImage failed', err);
+        alert('截图生成失败，请稍后重试~');
+      } finally {
+        try { restoreCanvases(); } catch (_) {}
+        btn.textContent = '保存图片';
+        btn.disabled = false;
+      }
     }
   </script>
 </body>
