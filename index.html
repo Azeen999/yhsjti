@@ -121,7 +121,7 @@ S
     .quiz-counter { font-size: 13px; color: var(--gray-3); font-weight: 500; flex-shrink: 0; }
 
     .progress-wrap {
-      padding: 30px 10px 0;
+      padding: 30px 30px 0;
       position: relative; height: 28px; display: flex; align-items: center;
     }
     .progress-track {
@@ -220,7 +220,7 @@ S
 
     .divider { height: 1px; background: var(--gray-2); margin: 0 24px 24px; }
 
-    .result-desc-wrap { padding: 0 24px; margin-bottom: 32px; }
+    .result-desc-wrap { padding: 0 24px; margin-bottom: 32px; margin-top: -20px; }
     .result-desc-title { font-size: 12px; color: var(--gray-3); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
     .result-desc-text { font-size: 14px; line-height: 1.8; color: #444; }
 
@@ -332,27 +332,27 @@ S
         options: [
           { key: 'A', text: '有点担心安全，会详细询问设施和教练资质，再做决定。', dim: 'S-J' },
           { key: 'B', text: '太棒了！立刻答应，享受挑战极限和肾上腺素飙升的快感。', dim: 'Se-P' },
-          { key: 'C', text: '委婉拒绝，提议去海边散步或爬山，觉得那样更惬意。', dim: 'Si-J' },
-          { key: 'D', text: '虽然不太感兴趣，但为了陪她，愿意尝试一下。', dim: 'Fe-J' }
+          { key: 'C', text: '委婉拒绝，提议去海边散步或爬山，觉得那样更惬意。', dim: 'I-J' },
+          { key: 'D', text: '虽然不太感兴趣，但为了陪她，愿意尝试一下。', dim: 'F-J' }
         ]
       },
       {
         char: '👑', bubble: '豆瓣上对永恒世界的分类是第一人称射击',
-        text: '公主卡吕普索在一个普通的清晨，单独邀请你共进早餐。这略显突兀的邀请，让你首先倾向于认为她的主要意图是：',
+        text: '公主卡吕普索在一个普通的清晨，单独邀请你共进早餐。这略显突兀的邀请，你认为她的主要意图是：',
         options: [
-          { key: 'A', text: '这可能是皇室某种惯例性社交，或她今日恰好需要个早餐伙伴。', dim: 'T' },
-          { key: 'B', text: '她遇到了某些私人困扰，需要找一个绝对信任的人倾诉。', dim: 'F' },
-          { key: 'C', text: '她对你有好感，想借这个私密机会多了解你。', dim: 'F' },
-          { key: 'D', text: '永恒世界中重要人物的变动可能对王国造成威胁，她需要你这股重要力量。', dim: 'N' }
+          { key: 'A', text: '这可能是皇室某种惯例性社交，或她今日恰好需要个早餐伙伴。', dim: 'P' },
+          { key: 'B', text: '她遇到了某些私人困扰，需要找一个绝对信任的人倾诉。', dim: 'Fi' },
+          { key: 'C', text: '她对你有好感，想借这个私密机会多了解你。', dim: 'Si' },
+          { key: 'D', text: '永恒世界中重要人物的变动可能对王国造成威胁，她需要你这股重要力量。', dim: 'S-T' }
         ]
       },
       {
         char: '🎋', bubble: '安妮9岁看小黄人和冰雪奇缘(2013),可能是04年人',
         text: '无意中发现安妮写满你心事的日记本，你会？',
         options: [
-          { key: 'A', text: '放回原处，但心里感到很温暖，对她的感情更确定。', dim: 'F-J' },
+          { key: 'A', text: '放回原处，但心里感到很温暖，对她的感情更确定。', dim: 'Fi-J' },
           { key: 'B', text: '立刻合上放回，当作没看见，尊重隐私。', dim: 'T-J' },
-          { key: 'C', text: '非常纠结，最终可能看一点，但之后会找机会询问。', dim: 'F-P' },
+          { key: 'C', text: '非常纠结，最终可能看一点，但之后会找机会询问。', dim: 'S' },
           { key: 'D', text: '心跳加速，忍不住小心翻阅，想了解更多。', dim: 'P' }
         ]
       },
@@ -371,8 +371,8 @@ S
         text: '诺娃的电脑在破解关键密码时突然蓝屏，数据可能丢失，她急哭了，你会？',
         options: [
           { key: 'A', text: '保持冷静，告诉她"别急，我们一起重新找，一定有办法"。', dim: 'F' },
-          { key: 'B', text: '一边安抚，一边大脑飞速思考可能的解决方案。', dim: 'T' },
-          { key: 'C', text: '开个玩笑缓解气氛："看来你的电脑也觉得这密码太难为人了。"', dim: 'T' },
+          { key: 'B', text: '一边安抚，一边大脑飞速思考可能的解决方案。', dim: 'T-J' },
+          { key: 'C', text: '开个玩笑缓解气氛："看来你的电脑也觉得这密码太难为人了。"', dim: 'Te-P' },
           { key: 'D', text: '知道自己可能帮不上忙，先抱住她安慰等她情绪稳定。', dim: 'F' }
         ]
       },
@@ -381,7 +381,7 @@ S
         text: '格斗训练中被达莉亚击倒，她得意地笑，你会？',
         options: [
           { key: 'A', text: '迅速起身，眼神锐利，准备再战。', dim: 'T' },
-          { key: 'B', text: '笑着认输，夸她进步真大。', dim: 'F' },
+          { key: 'B', text: '笑着认输，夸她进步真大。', dim: 'Fe' },
           { key: 'C', text: '假装受伤不起，逗她过来查看。', dim: 'N-P' },
           { key: 'D', text: '躺地上耍赖："刚才地滑，不算！"', dim: 'E-P' }
         ]
@@ -390,7 +390,7 @@ S
         char: '🌙', bubble: '那天露娜到底看到了什么？',
         text: '露娜突然一脸认真地问你"人类存在的意义是什么"，你正在吃东西，会怎么回答？',
         options: [
-          { key: 'A', text: '停下动作，认真思考后给出一个自己认为合理的答案。', dim: 'T' },
+          { key: 'A', text: '停下动作，认真思考后给出一个自己认为合理的答案。', dim: 'I-T' },
           { key: 'B', text: '坦白自己不知道，并反问她："你觉得呢？我想听听你的。"', dim: 'N-P' },
           { key: 'C', text: '看着她，觉得她思考的样子很美，说："你的存在就是意义。"', dim: 'F' },
           { key: 'D', text: '觉得这问题太严肃了，笑着给她分享好吃的："为了这个！"', dim: 'S-P' }
@@ -407,22 +407,22 @@ S
         ]
       },
       {
-        char: '🌿', bubble: '健身和瑜伽都要量力而行，循序渐进',
+        char: '🌿', bubble: '健身和瑜伽都要量力而行,循序渐进',
         text: '和南希一起上瑜伽课，她向其他学员夸赞你的身材，并自然地抚摸你的肩膀，你会？',
         options: [
-          { key: 'A', text: '很享受这一刻，觉得这是你们默契的表现，并希望可以多停留一会。', dim: 'I-F' },
-          { key: 'B', text: '顺着她的话展示了一个标准的平板支撑，并且笑着看向大家。', dim: 'E-F' },
+          { key: 'A', text: '很享受这一刻，自然的接受大家的目光，觉得这是你们默契的表现。', dim: 'E-F' },
+          { key: 'B', text: '顺着她的话展示了一个标准的平板支撑，并且笑着看向大家。', dim: 'E-T' },
           { key: 'C', text: '脑中突然闪过，她今天好像格外开心，是因为看到我的进步了吗？', dim: 'I-T' },
           { key: 'D', text: '感到一丝尴尬，但是听到南希的夸奖还是心中暗喜。', dim: 'I-F' }
         ]
       },
       {
-        char: '🎋', bubble: '亡灵节是墨西哥的传统节日，在每年的11月1和2日',
+        char: '🎋', bubble: '亡灵节是墨西哥的传统节日,在每年的11月1和2日',
         text: '和露娜参加完亡灵节聚会后，你收到了她发来的合影，照片里你们笑得很开心。这时安妮路过看到了，你会？',
         options: [
           { key: 'A', text: '担心安妮误会，急忙解释这是和露娜在亡灵节的合照。', dim: 'I-F' },
           { key: 'B', text: '把手机稍微移开一点，告诉安妮今天的所见所闻。', dim: 'F-J' },
-          { key: 'C', text: '自然地收起手机，邀请安妮去那家新甜品店。', dim: 'J' },
+          { key: 'C', text: '自然地收起手机，邀请安妮去那家新甜品店。', dim: 'T-P' },
           { key: 'D', text: '兴奋地招呼她："安妮快看！我今天的装扮怎么样？"', dim: 'E-P' }
         ]
       },
@@ -433,16 +433,16 @@ S
           { key: 'A', text: '亚历克斯那样的探索家，随性洒脱，总能发现意想不到的路径或彩蛋。', dim: 'N-P' },
           { key: 'B', text: '诺娃那样的技术专家，能破解机关谜题，提供最安全的行动路线。', dim: 'I' },
           { key: 'C', text: '达莉亚那样的行动派，身手敏捷，遇到战斗能第一时间并肩作战。', dim: 'E' },
-          { key: 'D', text: '安妮那样的战力担当，面对任何危险都能用核爆化解。', dim: 'J' }
+          { key: 'D', text: '安妮那样的战力担当，面对任何危险都能用"核爆"化解。', dim: 'J' }
         ]
       },
       {
-        char: '🌿', bubble: '最后一步～',
+        char: '🌿', bubble: '关注塔菲喵 @西罗马帝国摄像头',
         text: '结束了一天的冒险，你回到现实中的克雷顿，这时你的手机同时亮起，你会优先处理哪条信息？',
         options: [
           { key: 'A', text: '闭上眼睛休息一下，梳理一下游戏中发生的事情。', dim: 'J' },
           { key: 'B', text: '无人能打扰，先吃点东西恢复一下精力。', dim: 'P' },
-          { key: 'C', text: '南希去楼下新开了家不错的咖啡馆一起坐坐', dim: 'I' },
+          { key: 'C', text: '南希邀请你去楼下新开的咖啡馆坐坐', dim: 'I' },
           { key: 'D', text: '佩妮洛普邀请你参加今晚的派对', dim: 'E' }
         ]
       }
@@ -513,7 +513,7 @@ S
       const pct = currentQ / total;
       const wrapW = wrap.clientWidth;
       // 进度条有效宽度 = wrapWidth - 20px（左右各10px padding）
-      gif.style.left = `${pct * (wrapW - 20) + 7}px`;
+      gif.style.left = `${pct * (wrapW - 60) + 26}px`;
       document.getElementById('question-text').textContent = q.text;
 
       const container = document.getElementById('options-container');
