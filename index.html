@@ -320,7 +320,6 @@ S
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
     // ═══════════════════════════════════════════════════════════════════
     // 12道题目（来自试题.md，适配MBTI维度AB二选一）
@@ -716,6 +715,24 @@ S
     }
 
     // ───────────────────────────────────────────────────────────────
+    // ───────────────────────────────────────────────────────────────
+    // 动态加载 html2canvas
+    // ───────────────────────────────────────────────────────────────
+    const CAPTURE_CDN = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+    let _captureLibLoading = null;
+    function ensureCaptureLib() {
+      if (window.html2canvas) return Promise.resolve();
+      if (_captureLibLoading) return _captureLibLoading;
+      _captureLibLoading = new Promise(function(resolve, reject) {
+        const s = document.createElement('script');
+        s.src = CAPTURE_CDN;
+        s.onload = function() { resolve(); };
+        s.onerror = function() { _captureLibLoading = null; reject(new Error('html2canvas load failed')); };
+        document.head.appendChild(s);
+      });
+      return _captureLibLoading;
+    }
+
     // 保存图片（借鉴 app.js 的完整实现）
     // ───────────────────────────────────────────────────────────────
     async function saveAsImage() {
@@ -729,6 +746,9 @@ S
       let restoreCanvases = function() {};
 
       try {
+        // 0. 确保 html2canvas 已加载
+        await ensureCaptureLib();
+
         // 1. 图片转 Data URL（解决跨域）
         await embedImagesAsDataUrl(resultPage);
 
